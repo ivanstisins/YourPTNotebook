@@ -27,16 +27,12 @@ public class PTRegistration extends AppCompatActivity {
     private EditText et_name, et_username, et_age,et_gender,et_gymname, et_email, et_password;
     private String URL = "http://10.0.2.2:80/YOurPTNoteBook/Pt_register.php";
     private String name,username,age,gender,gymname,email,password;
-   // private Button register;
-  //  private DocumentReference mRootRef;
-   // private FirebaseAuth mAuth;
 
     public PTRegistration() {
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       // mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ptregistration);
         et_name = findViewById(R.id.FullName);
@@ -46,53 +42,13 @@ public class PTRegistration extends AppCompatActivity {
         et_gymname = findViewById(R.id.GymName);
         et_email = findViewById(R.id.PTEmail);
         et_password = findViewById(R.id.PTPassword);
-       // register = findViewById(R.id.RegisterButton);
         name = username = age = gender =gymname = email = password = "";
-/*
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                name = String.valueOf(et_name.getText());
-                username = String.valueOf(et_username.getText());
-                age = String.valueOf(et_age.getText());
-                gender = String.valueOf(et_gender.getText());
-                gymname = String.valueOf(et_gymname.getText());
-                email = String.valueOf(et_email.getText());
-                password = String.valueOf(et_password.getText());
-                if(!name.equals("") && !username.equals("") && !age.equals("") && !gender.equals("") && !gymname.equals("") && !email.equals("") && !password.equals("")){
-                    registerUser(name,username,age,gender,gymname,email,password);
-                }
-            }
-        });
-    */
-    }
- /*
 
-    private void registerUser(String name, String username, String age, String gender, String gymname, String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                    Map<String, Object> data = new HashMap<>();
-                    data.put("Username", username);
-                    data.put("FullName", name);
-                    data.put("Age", age);
-                    data.put("Gender",gender);
-                    data.put("GymName", gymname);
-                    data.put("Email", email);
-                    data.put("Password", password);
-                    data.put("id" , mAuth.getCurrentUser().getUid());
-                    mRootRef.collection("ptrainer").document("ptrainerId").set(data);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(PTRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 
-    */
+
+
         public void register(View view){
             name = String.valueOf(et_name.getText());
             username = String.valueOf(et_username.getText());

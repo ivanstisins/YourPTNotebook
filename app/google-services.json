@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "222995282564",
+    "project_id": "yourptnotebook",
+    "storage_bucket": "yourptnotebook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222995282564:android:f783b7c1b600254df8e0d1",
+        "android_client_info": {
+          "package_name": "com.example.yourptnotebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222995282564-298feufj0rhnerj1uurquo5orot4te9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMpXlLwfgZ1zNPqf2qRskgLSrD0We1VPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222995282564-298feufj0rhnerj1uurquo5orot4te9r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
