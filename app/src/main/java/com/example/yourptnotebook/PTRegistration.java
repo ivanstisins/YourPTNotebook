@@ -34,7 +34,6 @@ import java.util.Map;
 
 public class PTRegistration extends AppCompatActivity {
     private EditText et_name, et_username, et_age,et_gender,et_gymname, et_email, et_password;
-    //private String URL = "http://10.0.2.2:80/YOurPTNoteBook/Pt_register.php";
     private String name,username,age,gender,gymname,email,password;
     private Button register;
     private DocumentReference db;
@@ -70,8 +69,7 @@ public class PTRegistration extends AppCompatActivity {
                 email = String.valueOf(et_email.getText());
                 password = String.valueOf(et_password.getText());
                 if(!name.equals("") && !username.equals("") && !age.equals("") && !gender.equals("") && !gymname.equals("") && !email.equals("") && !password.equals("")){
-                   registerUser(name,username,age,gender,gymname,email,password);
-                    System.out.println("it broke");
+                   registerPt(name,username,age,gender,gymname,email,password);
                 }
             }
         });
@@ -79,13 +77,15 @@ public class PTRegistration extends AppCompatActivity {
     }
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(mAuth.getCurrentUser()!=null){
+            startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            finish();
+        }
 
     }
 
 
-    private void registerUser(String name, String username, String age, String gender, String gymname, String email, String password) {
+    private void registerPt(String name, String username, String age, String gender, String gymname, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

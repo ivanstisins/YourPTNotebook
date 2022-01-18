@@ -8,26 +8,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.HashMap;
 
 public class Dashboard extends AppCompatActivity {
-    private TextView username;
+    private TextView email;
     private Button button_logout;
-    SessionManager sessionManager;
+    String memail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        sessionManager = new SessionManager(this);
-        sessionManager.checkLogin();
+
         button_logout = (Button) findViewById(R.id.button_logout);
-        username=findViewById(R.id.username);
+        email=findViewById(R.id.email);
 
-        HashMap<String, String> user = sessionManager.getUserDetails();
-        String musername = user.get(sessionManager.USERNAME);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            memail = currentUser.getEmail();
+            email.setText(memail);
+        }
 
-        username.setText(musername);
-
-        button_logout.setOnClickListener((v) -> {sessionManager.logout();});
+        button_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Dashboard.this, Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+            }
+        });
     }
 }

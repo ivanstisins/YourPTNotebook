@@ -29,8 +29,8 @@ import java.util.Map;
 
 
 public class Login extends AppCompatActivity {
-    private EditText et_username, et_password;
-    private String username, password;
+    private EditText et_email, et_password;
+    private String email, password;
     private Button login;
     private FirebaseAuth mAuth;
     SessionManager sessionManager;
@@ -42,27 +42,31 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sessionManager = new SessionManager(getApplicationContext());
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_login);
-        et_username = findViewById(R.id.LogUserName);
+        et_email = findViewById(R.id.LogUserEmail);
         et_password = findViewById(R.id.LogPassword);
         login = findViewById(R.id.LogButton);
         mAuth = FirebaseAuth.getInstance();
-        username = password = "";
+        email = password = "";
+        if(firebaseAuth.getCurrentUser()!=null){
+            startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            finish();
+        }
       login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                username = et_username.getText().toString();
+                email = et_email.getText().toString();
                 password = et_password.getText().toString();
-                if(!username.equals("") && !password.equals("")){
-                    loginUser(username,password);
+                if(!email.equals("") && !password.equals("")){
+                    loginUser(email,password);
                 }
             }
         });
     }
 
-    private void loginUser(String username, String password) {
-       mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    private void loginUser(String email, String password) {
+       mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
            @Override
            public void onComplete(@NonNull Task<AuthResult> task) {
                if (task.isSuccessful()) {
