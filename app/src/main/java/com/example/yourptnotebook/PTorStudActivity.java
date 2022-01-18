@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class PTorStudActivity extends AppCompatActivity {
 
     private Button ptButton;
@@ -16,7 +18,11 @@ public class PTorStudActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ptor_stud);
-
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser()!=null){
+            startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            finish();
+        }
         ptButton = (Button)findViewById(R.id.PTRegister);
         ptButton.setOnClickListener(new View.OnClickListener() {
             @Override
