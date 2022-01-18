@@ -75,15 +75,6 @@ public class StudRegistration extends AppCompatActivity {
             }
         });
     }
-    public void onStart() {
-        super.onStart();
-
-        if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),Dashboard.class));
-            finish();
-        }
-
-    }
 
     public void Studregister(String name, String username, String age,String height,String weight, String gender, String gymname, String email, String password){
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -104,6 +95,14 @@ public class StudRegistration extends AppCompatActivity {
                     data.put("id", mAuth.getCurrentUser().getUid());
                     db.collection("student").add(data);
                 }
+            }
+        }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Intent intent = new Intent(StudRegistration.this, Dashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

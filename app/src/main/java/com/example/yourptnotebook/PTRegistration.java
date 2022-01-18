@@ -44,7 +44,7 @@ public class PTRegistration extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ptregistration);
@@ -56,7 +56,7 @@ public class PTRegistration extends AppCompatActivity {
         et_email = findViewById(R.id.PTEmail);
         et_password = findViewById(R.id.PTPassword);
         register = findViewById(R.id.PTsignUp);
-        name = username = age = gender =gymname = email = password = "";
+        name = username = age = gender = gymname = email = password = "";
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,19 +68,11 @@ public class PTRegistration extends AppCompatActivity {
                 gymname = String.valueOf(et_gymname.getText());
                 email = String.valueOf(et_email.getText());
                 password = String.valueOf(et_password.getText());
-                if(!name.equals("") && !username.equals("") && !age.equals("") && !gender.equals("") && !gymname.equals("") && !email.equals("") && !password.equals("")){
-                   registerPt(name,username,age,gender,gymname,email,password);
+                if (!name.equals("") && !username.equals("") && !age.equals("") && !gender.equals("") && !gymname.equals("") && !email.equals("") && !password.equals("")) {
+                    registerPt(name, username, age, gender, gymname, email, password);
                 }
             }
         });
-
-    }
-    public void onStart() {
-        super.onStart();
-        if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),Dashboard.class));
-            finish();
-        }
 
     }
 
@@ -104,10 +96,19 @@ public class PTRegistration extends AppCompatActivity {
 
                 }
             }
+        }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Intent intent = new Intent(PTRegistration.this, Dashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(PTRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
