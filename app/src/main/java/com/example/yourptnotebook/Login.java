@@ -85,47 +85,6 @@ public class Login extends AppCompatActivity {
     }
 
 
-/*
-        public void login(View v) {
-            username = String.valueOf(et_username.getText());
-            password = String.valueOf(et_password.getText());
-            if(!username.equals("") && !password.equals("")){
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("Response", response);
-                        if (response.equals("Login Successful")) {
-                            sessionManager.createSession(username);
-                            Intent intent = new Intent(Login.this, Dashboard.class);
-                            startActivity(intent);
-                            finish();
-
-                        } else if (response.equals("Username or Password is wrong")) {
-                            Toast.makeText(Login.this, "invalid credentials", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> data = new HashMap<>();
-                        data.put("Username", username);
-                        data.put("Password", password);
-                        return data;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(this);
-                requestQueue.add(stringRequest);
-            }
-            else{
-                Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
-            }
-        }
-        */
     public void goToReg(View v) {
         Intent intent = new Intent(this, PTorStudActivity.class);
         startActivity(intent);
