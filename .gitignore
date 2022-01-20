@@ -14,4 +14,8 @@
 .cxx
 local.properties
 app/yourptnotebook-firebase-adminsdk-lxtir-e0bddbdbb3.json
+<<<<<<< HEAD
 app/google-services.json
+=======
+app/google-services.json
+>>>>>>> firestore_implementation

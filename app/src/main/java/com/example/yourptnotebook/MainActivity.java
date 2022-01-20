@@ -7,12 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
     private Button regButton;
     private Button logButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser()!=null){
+            startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            finish();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
