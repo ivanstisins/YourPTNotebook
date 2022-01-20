@@ -39,6 +39,7 @@ public class PTRegistration extends AppCompatActivity {
     private DocumentReference db;
     private FirebaseAuth mAuth;
 
+
     public PTRegistration() {
     }
 
