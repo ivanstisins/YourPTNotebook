@@ -92,14 +92,13 @@ public class PTRegistration extends AppCompatActivity {
                     data.put("Email", email);
                     data.put("Password", password);
                     data.put("id", mAuth.getCurrentUser().getUid());
-                    db.collection("ptrainer").add(data);
-
+                    db.collection("ptrainer").document(mAuth.getCurrentUser().getUid()).set(data);
                 }
             }
         }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Intent intent = new Intent(PTRegistration.this, Dashboard.class);
+                Intent intent = new Intent(PTRegistration.this, Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();

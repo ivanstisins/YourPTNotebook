@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 
@@ -30,14 +32,25 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         button_logout = (Button) findViewById(R.id.button_logout);
-        email=findViewById(R.id.email);
-
+        email = findViewById(R.id.email);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            memail = currentUser.getEmail();
-            email.setText(memail);
-        }
+            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if(document.exists()){
+                            email.setText(document.getString("Username"));
+                            //email.setText(memail);
 
+                        }
+                    }
+                }
+            });
+        }
+        //email.setText(memail);
 
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override

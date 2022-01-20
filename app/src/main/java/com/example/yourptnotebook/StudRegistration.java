@@ -42,8 +42,8 @@ public class StudRegistration extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stud_registration);
         et_name = findViewById(R.id.StudName);
         et_username = findViewById(R.id.StudUsername);
@@ -93,13 +93,13 @@ public class StudRegistration extends AppCompatActivity {
                     data.put("Email", email);
                     data.put("Password", password);
                     data.put("id", mAuth.getCurrentUser().getUid());
-                    db.collection("student").add(data);
+                    db.collection("student").document(mAuth.getCurrentUser().getUid()).set(data);
                 }
             }
         }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Intent intent = new Intent(StudRegistration.this, Dashboard.class);
+                Intent intent = new Intent(StudRegistration.this, Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
