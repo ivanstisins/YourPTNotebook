@@ -35,6 +35,7 @@ import java.util.Map;
 public class PTRegistration extends AppCompatActivity {
     private EditText et_name, et_username, et_age,et_gender,et_gymname, et_email, et_password;
     private String name,username,age,gender,gymname,email,password;
+
     private Button register;
     private DocumentReference db;
     private FirebaseAuth mAuth;
@@ -44,8 +45,8 @@ public class PTRegistration extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance();
 
+        mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ptregistration);
         et_name = findViewById(R.id.FullName);
@@ -112,7 +113,7 @@ public class PTRegistration extends AppCompatActivity {
         });
 
     }
-
+  
     public void openLogIn(){
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
