@@ -25,7 +25,8 @@ import java.util.HashMap;
 public class Dashboard extends AppCompatActivity {
     private TextView email;
     private Button button_logout;
-    String memail;
+    private Button addClient, manageClient, createClass, manageClass, createWorkout, manageWorkout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,12 @@ public class Dashboard extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         button_logout = (Button) findViewById(R.id.button_logout);
         email = findViewById(R.id.email);
+        addClient =(Button) findViewById(R.id.addClient);
+        manageClient =(Button) findViewById(R.id.manageClient);
+        createClass = (Button) findViewById(R.id.createClass);
+        manageClass = (Button) findViewById(R.id.ManageClasses);
+        createWorkout = (Button) findViewById(R.id.createWorkOut);
+        manageWorkout = (Button) findViewById(R.id.manageWorkout);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
@@ -43,14 +50,13 @@ public class Dashboard extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if(document.exists()){
                             email.setText(document.getString("Username"));
-                            //email.setText(memail);
+
 
                         }
                     }
                 }
             });
         }
-        //email.setText(memail);
 
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override

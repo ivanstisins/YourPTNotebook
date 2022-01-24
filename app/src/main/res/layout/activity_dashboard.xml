@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/welcometext"
         app:layout_constraintVertical_bias="0.055"
         tools:ignore="MissingConstraints" />
 
@@ -33,7 +33,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcometext"
         android:layout_width="66dp"
         android:layout_height="19dp"
         android:layout_marginStart="16dp"
@@ -65,7 +65,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/createClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -82,7 +82,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="40dp"
         android:text="Manage Classes"
-        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/createClass"
         app:layout_constraintTop_toBottomOf="@+id/manageClient"
         tools:ignore="MissingConstraints" />
 
@@ -94,7 +94,7 @@
         android:layout_marginTop="40dp"
         android:text="Create Workout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/createClass"
         tools:ignore="MissingConstraints" />
 
     <Button
