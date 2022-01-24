@@ -33,56 +33,54 @@ public class Login extends AppCompatActivity {
     private String email, password;
     private Button login;
     private FirebaseAuth mAuth;
-    SessionManager sessionManager;
-    private String URL = "http://10.0.2.2:80/YOurPTNoteBook/LogIn.php";
 
    public Login(){
 
    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        setContentView(R.layout.activity_login);
-        et_email = findViewById(R.id.LogUserEmail);
-        et_password = findViewById(R.id.LogPassword);
-        login = findViewById(R.id.LogButton);
-        mAuth = FirebaseAuth.getInstance();
-        email = password = "";
-        if(firebaseAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),Dashboard.class));
-            finish();
-        }
-      login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                email = et_email.getText().toString();
-                password = et_password.getText().toString();
-                if(!email.equals("") && !password.equals("")){
-                    loginUser(email,password);
-                }
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            setContentView(R.layout.activity_login);
+            et_email = findViewById(R.id.LogUserEmail);
+            et_password = findViewById(R.id.LogPassword);
+            login = findViewById(R.id.LogButton);
+            mAuth = FirebaseAuth.getInstance();
+            email = password = "";
+            if(firebaseAuth.getCurrentUser()!=null){
+                startActivity(new Intent(getApplicationContext(),Dashboard.class));
+                finish();
             }
-        });
-    }
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    email = et_email.getText().toString();
+                    password = et_password.getText().toString();
+                    if(!email.equals("") && !password.equals("")){
+                        loginUser(email,password);
+                    }
+                }
+            });
+        }
 
-    private void loginUser(String email, String password) {
-       mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-           @Override
-           public void onComplete(@NonNull Task<AuthResult> task) {
-               if (task.isSuccessful()) {
-                   Intent intent = new Intent(Login.this, Dashboard.class);
-                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   startActivity(intent);
-                   finish();
-               }
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-           }
-       });
-    }
+        private void loginUser(String email, String password) {
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(Login.this, Dashboard.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
 
     public void goToReg(View v) {
