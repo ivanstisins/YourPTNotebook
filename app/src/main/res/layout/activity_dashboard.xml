@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dashboard">
+    tools:context=".Dashboard"
+    android:background="@drawable/dashboardbackground">
 
 
     <TextView
@@ -12,98 +13,109 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcometext"
-        app:layout_constraintVertical_bias="0.055"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/custom_logout_button"
         android:text="Log out"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/welcometext"
-        android:layout_width="66dp"
-        android:layout_height="19dp"
+        android:layout_width="169dp"
+        android:layout_height="57dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="welcome"
+        android:text="Welcome"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <ImageButton
         android:id="@+id/addClient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Add Client"
+        android:layout_width="109dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="148dp"
+        android:background="@drawable/addclient"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="9dp" />
+        tools:ignore="MissingConstraints" />
 
-    <Button
+    <ImageButton
         android:id="@+id/manageClient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="48dp"
-        android:text="Manage Client"
+        android:layout_width="109dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="148dp"
+        android:background="@drawable/manageclient"
         app:layout_constraintStart_toEndOf="@+id/addClient"
         app:layout_constraintTop_toBottomOf="@+id/email"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <ImageButton
         android:id="@+id/createClass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:text="Create Class"
+        android:layout_width="109dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/createclass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addClient"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <ImageButton
         android:id="@+id/ManageClasses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="40dp"
-        android:text="Manage Classes"
+        android:layout_width="109dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/myclass"
         app:layout_constraintStart_toEndOf="@+id/createClass"
         app:layout_constraintTop_toBottomOf="@+id/manageClient"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <ImageButton
         android:id="@+id/createWorkOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:text="Create Workout"
+        android:layout_width="109dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/createworkout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createClass"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <ImageButton
         android:id="@+id/manageWorkout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="48dp"
-        android:text="manage Workout"
+        android:layout_width="109dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/myworkouts"
         app:layout_constraintStart_toEndOf="@+id/createWorkOut"
         app:layout_constraintTop_toBottomOf="@+id/ManageClasses"
         tools:ignore="MissingConstraints" />

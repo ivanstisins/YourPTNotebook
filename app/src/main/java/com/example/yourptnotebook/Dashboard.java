@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 public class Dashboard extends AppCompatActivity {
     private TextView email;
     private Button button_logout;
-    private Button addClient, manageClient, createClass, manageClass, createWorkout, manageWorkout;
+    private ImageButton addClient,manageClient, createClass, manageClass, createWorkout, manageWorkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,12 @@ public class Dashboard extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         button_logout = (Button) findViewById(R.id.button_logout);
         email = findViewById(R.id.email);
-        addClient =(Button) findViewById(R.id.addClient);
-        manageClient =(Button) findViewById(R.id.manageClient);
-        createClass = (Button) findViewById(R.id.createClass);
-        manageClass = (Button) findViewById(R.id.ManageClasses);
-        createWorkout = (Button) findViewById(R.id.createWorkOut);
-        manageWorkout = (Button) findViewById(R.id.manageWorkout);
+        addClient =(ImageButton) findViewById(R.id.addClient);
+        manageClient =(ImageButton) findViewById(R.id.manageClient);
+        createClass = (ImageButton) findViewById(R.id.createClass);
+        manageClass = (ImageButton) findViewById(R.id.ManageClasses);
+        createWorkout = (ImageButton) findViewById(R.id.createWorkOut);
+        manageWorkout = (ImageButton) findViewById(R.id.manageWorkout);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
@@ -66,5 +67,13 @@ public class Dashboard extends AppCompatActivity {
                 finish();
             }
         });
+        addClient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Dashboard.this, AddClient.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+            }
+        });
     }
+
 }
