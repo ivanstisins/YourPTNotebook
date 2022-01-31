@@ -92,6 +92,7 @@ public class StudRegistration extends AppCompatActivity {
                     data.put("GymName", gymname);
                     data.put("Email", email);
                     data.put("Password", password);
+                    data.put("isRegistered",true);
                     data.put("id", mAuth.getCurrentUser().getUid());
                     db.collection("student").document(mAuth.getCurrentUser().getUid()).set(data);
                 }
