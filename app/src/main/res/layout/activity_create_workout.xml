@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".create_workout">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/WorkoutName"
+        android:layout_width="226dp"
+        android:layout_height="51dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="16dp"
+        android:paddingStart="12dp"
+        android:ems="10"
+        android:background="@drawable/custom_textbox"
+        android:inputType="text"
+        android:hint="Workout Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:layout_above="@id/addExercise"
+        android:layout_below="@id/WorkoutName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id = "@+id/mylayout">
+
+            <!--<TextView
+                android:id="@+id/ExerciseName"
+                android:layout_width="120dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/ExerciseSets"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/ExerciseName" />
+
+            <TextView
+                android:id="@+id/ExerciseReps"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/ExerciseSets"/> -->
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/addExercise"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginBottom="92dp"
+        android:text="add Exercise"
+        android:onClick="openAddExercise"/>
+
+    <Button
+        android:id="@+id/createWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="107dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginBottom="27dp"
+        android:text="create workout" />
+
+
+</RelativeLayout>

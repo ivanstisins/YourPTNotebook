@@ -50,30 +50,37 @@ public class Dashboard extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if(document.exists()){
-                            email.setText(document.getString("Username"));
-
+                            //email.setText(document.getString("Username"));
+                            Ptrainer ptrainer = document.toObject(Ptrainer.class);
+                            email.setText(ptrainer.getUsername());
 
                         }
                     }
                 }
             });
+            button_logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(Dashboard.this, Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
+            });
+            addClient.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Dashboard.this, AddClient.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
+            });
+            createWorkout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Dashboard.this, create_workout.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
+            });
         }
-
-        button_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Dashboard.this, Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
-            }
-        });
-        addClient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Dashboard.this, AddClient.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
-            }
-        });
     }
 
 }

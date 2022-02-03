@@ -55,8 +55,6 @@ public class PTRegistration extends AppCompatActivity {
         et_gymname = findViewById(R.id.GymName);
         et_email = findViewById(R.id.PTEmail);
         et_password = findViewById(R.id.PTPassword);
-        name = username = age = gender =gymname = email = password = "";
-
         register = findViewById(R.id.PTsignUp);
         name = username = age = gender = gymname = email = password = "";
 
