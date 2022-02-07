@@ -83,6 +83,7 @@ public class PTRegistration extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
+                   /*
                     Map<String, Object> data = new HashMap<>();
                     data.put("Username", username);
                     data.put("FullName", name);
@@ -92,7 +93,11 @@ public class PTRegistration extends AppCompatActivity {
                     data.put("Email", email);
                     data.put("Password", password);
                     data.put("id", mAuth.getCurrentUser().getUid());
-                    db.collection("ptrainer").document(mAuth.getCurrentUser().getUid()).set(data);
+
+                    */
+                    Ptrainer ptrainer = new Ptrainer(username,email,name,age,gender,gymname,password,
+                            mAuth.getCurrentUser().getUid());
+                    db.collection("ptrainer").document(mAuth.getCurrentUser().getUid()).set(ptrainer);
                 }
             }
         }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

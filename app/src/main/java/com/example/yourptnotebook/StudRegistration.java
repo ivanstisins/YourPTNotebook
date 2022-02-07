@@ -82,7 +82,7 @@ public class StudRegistration extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    Map<String, Object> data = new HashMap<>();
+                   /* Map<String, Object> data = new HashMap<>();
                     data.put("Username", username);
                     data.put("FullName", name);
                     data.put("Age", age);
@@ -94,7 +94,10 @@ public class StudRegistration extends AppCompatActivity {
                     data.put("Password", password);
                     data.put("isRegistered",true);
                     data.put("id", mAuth.getCurrentUser().getUid());
-                    db.collection("student").document(mAuth.getCurrentUser().getUid()).set(data);
+                    */
+                    Student student = new Student(username,email,name,gender, gymname, password, mAuth.getCurrentUser().getUid(), age, height, weight,true);
+                    db.collection("student").document(mAuth.getCurrentUser().getUid()).set(student);
+
                 }
             }
         }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

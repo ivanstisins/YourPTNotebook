@@ -3,13 +3,26 @@ package com.example.yourptnotebook;
 public class Ptrainer {
     String username;
     String email;
-    String fullNmame;
     String fullName;
     String gender;
     String gymName;
     String password;
     String id;
-    public Ptrainer() {
+    String age;
+
+    public Ptrainer(String username, String email, String fullName,String age,String gender, String gymName, String password, String id) {
+        this.username = username;
+        this.email = email;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.gymName = gymName;
+        this.password = password;
+        this.id = id;
+        this.age =age;
+    }
+
+    public Ptrainer(){
+
     }
 
     public String getUsername() {
@@ -20,10 +33,6 @@ public class Ptrainer {
         return email;
     }
 
-    public String getFullNmame() {
-        return fullNmame;
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -31,6 +40,8 @@ public class Ptrainer {
     public String getGender() {
         return gender;
     }
+
+    public  String getAge(){return age;}
 
     public String getGymName() {
         return gymName;
