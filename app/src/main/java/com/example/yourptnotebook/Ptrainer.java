@@ -1,5 +1,7 @@
 package com.example.yourptnotebook;
 
+import java.util.ArrayList;
+
 public class Ptrainer {
     String username;
     String email;
@@ -9,6 +11,7 @@ public class Ptrainer {
     String password;
     String id;
     String age;
+    ArrayList<Student> students;
 
     public Ptrainer(String username, String email, String fullName,String age,String gender, String gymName, String password, String id) {
         this.username = username;
@@ -23,6 +26,38 @@ public class Ptrainer {
 
     public Ptrainer(){
 
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setGymName(String gymName) {
+        this.gymName = gymName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getUsername() {
@@ -54,4 +89,13 @@ public class Ptrainer {
     public String getId() {
         return id;
     }
+
+    public void addStudent(Student s){
+        students.add(s);
+    }
+
+    public ArrayList<Student> getStudents(){
+        return students;
+    }
+
 }
