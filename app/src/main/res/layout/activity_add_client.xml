@@ -9,14 +9,14 @@
 
     <ImageButton
         android:id="@+id/backbutton"
-        android:layout_width="71dp"
-        android:layout_height="44dp"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/backbutton"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

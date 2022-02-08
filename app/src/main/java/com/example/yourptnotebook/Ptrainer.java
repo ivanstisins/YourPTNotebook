@@ -22,6 +22,7 @@ public class Ptrainer {
         this.password = password;
         this.id = id;
         this.age =age;
+        this.students = new ArrayList<Student>();
     }
 
     public Ptrainer(){

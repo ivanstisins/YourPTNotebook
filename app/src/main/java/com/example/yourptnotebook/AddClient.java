@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class AddClient extends AppCompatActivity {
     private RecyclerView clientList;
-    //Ptrainer ptrainer = new Ptrainer();
+    Ptrainer ptrainer;
     ArrayList<Student> studentArrayList;
     ClientListAdapter clientListAdapter;
     private ImageButton backbutton;
@@ -49,7 +49,7 @@ public class AddClient extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         studentArrayList = new ArrayList<Student>();
-        clientListAdapter = new ClientListAdapter(AddClient.this, studentArrayList);
+        clientListAdapter = new ClientListAdapter(AddClient.this, studentArrayList,ptrainer);
         clientList.setAdapter(clientListAdapter);
 
         if (currentUser != null) {
@@ -72,7 +72,6 @@ public class AddClient extends AppCompatActivity {
                     }
                 }
             });
-
 
             backbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
