@@ -80,6 +80,14 @@ public class Dashboard extends AppCompatActivity {
                     finish();
                 }
             });
+
+            manageClient.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Dashboard.this, ManageClients.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
+            });
         }
     }
 
