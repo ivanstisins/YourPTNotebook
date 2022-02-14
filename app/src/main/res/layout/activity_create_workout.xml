@@ -13,16 +13,15 @@
         android:layout_width="226dp"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="81dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="78dp"
         android:background="@drawable/custom_textbox"
         android:ems="10"
         android:hint="Workout Name"
         android:inputType="text"
-        android:paddingStart="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingStart="12dp" />
 
     <Button
         android:id="@+id/addExercise"
@@ -31,10 +30,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="82dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginBottom="59dp"
         android:text="add Exercise" />
-    <!--android:onClick="openAddExercise"-->
 
     <Button
         android:id="@+id/createWorkout"
@@ -44,11 +42,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="107dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginBottom="5dp"
         android:text="create workout" />
-
 
     <Spinner
         android:id="@+id/setSetsSpinner"
@@ -57,8 +54,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="239dp"
-        android:layout_marginTop="75dp" />
+        android:layout_marginStart="231dp"
+        android:layout_marginTop="144dp" />
 
     <Spinner
         android:id="@+id/setRepsSpinner"
@@ -66,8 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="75dp" />
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="144dp" />
 
     <EditText
         android:id="@+id/setExerciseName"
@@ -75,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="144dp"
         android:background="@drawable/custom_textbox"
         android:ems="10"
         android:hint="Exercise Name"
@@ -85,12 +82,25 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ExerciseList"
-        android:layout_width="match_parent"
-        android:layout_height="386dp"
+        android:layout_width="409dp"
+        android:layout_height="360dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="109dp" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="183dp" />
+
+    <ImageButton
+        android:id="@+id/backbutton"
+        android:layout_width="139dp"
+        android:layout_height="52dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/backbutton"
+        tools:ignore="MissingConstraints" />
 
 
 </RelativeLayout>

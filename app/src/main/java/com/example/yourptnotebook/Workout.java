@@ -15,6 +15,10 @@ public class Workout {
     public Workout() {
     }
 
+    public String getName() {
+        return name;
+    }
+
     public ArrayList<Exercise> getExercises(){
         return exercises;
     }

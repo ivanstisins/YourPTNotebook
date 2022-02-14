@@ -88,6 +88,14 @@ public class Dashboard extends AppCompatActivity {
                     finish();
                 }
             });
+
+            manageWorkout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Dashboard.this, ManageWorkouts.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
+            });
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -49,6 +51,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
     private RecyclerView exerciseList;
     Button createWorkout;
     Workout workout;
+    ImageButton backbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
         textView = new TextView(create_workout.this);
         setExerciseName = findViewById(R.id.setExerciseName);
         addExercise = findViewById(R.id.addExercise);
+        backbutton = findViewById(R.id.backbutton);
         createWorkout = findViewById(R.id.createWorkout);
         workoutName = findViewById(R.id.WorkoutName);
         exercises = new ArrayList<>();
@@ -101,7 +105,8 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                 @Override
                 public void onClick(View view) {
                     String strworkoutname = workoutName.getText().toString();
-                    workout = new Workout(strworkoutname, exercises);
+                    workout = new Workout(workoutName.getText().toString(), exercises);
+                    System.out.println(workout.getName());
 
                     DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
                     dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -119,6 +124,15 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                             }
                         }
                     });
+                }
+            });
+
+            backbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.out.println("button is pressed");
+                    Intent intent = new Intent(create_workout.this, Dashboard.class);
+                    startActivity(intent);
                 }
             });
 
