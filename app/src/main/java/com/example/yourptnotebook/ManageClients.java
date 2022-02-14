@@ -42,9 +42,6 @@ public class ManageClients extends AppCompatActivity {
         backbutton = (ImageButton) findViewById(R.id.backbutton);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        //ptStudentArrayList = ptrainer.getStudents();
-        //manageClientAdapter = new ManageClientAdapter(ManageClients.this,ptrainer,ptStudentArrayList);
-        //manageClientsList.setAdapter(manageClientAdapter);
         if (currentUser != null) {
             db.collection("ptrainer").addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override

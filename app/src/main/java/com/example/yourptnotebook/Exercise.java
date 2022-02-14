@@ -14,6 +14,18 @@ public class Exercise {
 
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSets(String sets) {
+        this.sets = sets;
+    }
+
+    public void setReps(String reps) {
+        this.reps = reps;
+    }
+
     public String getName() {
         return name;
     }

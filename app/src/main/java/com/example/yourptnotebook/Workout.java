@@ -7,12 +7,12 @@ public class Workout {
     String name;
     ArrayList<Exercise> exercises = new ArrayList<>();
 
-    public Workout(String name) {
+    public Workout(String name,ArrayList<Exercise> exercises) {
         this.name = name;
+        this.exercises = exercises;
     }
 
-    public void addExercise(Exercise e){
-        exercises.add(e);
+    public Workout() {
     }
 
     public ArrayList<Exercise> getExercises(){

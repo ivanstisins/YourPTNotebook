@@ -12,8 +12,11 @@ public class Ptrainer {
     String id;
     String age;
     ArrayList<Student> students;
+    ArrayList<Workout> workouts;
 
-    public Ptrainer(String username, String email, String fullName,String age,String gender, String gymName, String password, String id) {
+
+
+    public Ptrainer(String username, String email, String fullName, String age, String gender, String gymName, String password, String id) {
         this.username = username;
         this.email = email;
         this.fullName = fullName;
@@ -23,6 +26,7 @@ public class Ptrainer {
         this.id = id;
         this.age =age;
         this.students = new ArrayList<Student>();
+        this.workouts = new ArrayList<Workout>();
     }
 
     public Ptrainer(){
@@ -97,6 +101,14 @@ public class Ptrainer {
 
     public ArrayList<Student> getStudents(){
         return students;
+    }
+
+    public ArrayList<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(ArrayList<Workout> workouts) {
+        this.workouts = workouts;
     }
 
 }
