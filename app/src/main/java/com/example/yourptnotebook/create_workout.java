@@ -104,7 +104,6 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
             createWorkout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String strworkoutname = workoutName.getText().toString();
                     workout = new Workout(workoutName.getText().toString(), exercises);
                     System.out.println(workout.getName());
 

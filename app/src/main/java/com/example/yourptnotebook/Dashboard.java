@@ -96,6 +96,22 @@ public class Dashboard extends AppCompatActivity {
                     finish();
                 }
             });
+
+            createClass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Dashboard.this, CreateClass.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
+            });
+
+            manageClass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Dashboard.this, ManageClasses.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
+            });
         }
     }
 
