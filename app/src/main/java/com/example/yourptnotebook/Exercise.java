@@ -37,4 +37,9 @@ public class Exercise {
     public String getReps() {
         return reps;
     }
+
+    @Override
+    public String toString() {
+        return "Name: "+name+"\n"+"Sets: "+sets+"\n"+"Reps: "+reps+"\n";
+    }
 }

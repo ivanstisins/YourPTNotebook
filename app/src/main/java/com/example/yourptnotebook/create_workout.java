@@ -44,6 +44,8 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
     Button addExercise;
     Spinner setSets;
     Spinner setReps;
+    Spinner setClients;
+    Button addClients;
     EditText setExerciseName, workoutName;
     Exercise exercise;
     ArrayList<Exercise> exercises;
@@ -52,6 +54,12 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
     Button createWorkout;
     Workout workout;
     Button myWorkouts;
+    Ptrainer ptrainer;
+    ArrayList<Student> students;
+    ArrayList<Student> workoutstudents = new ArrayList<>();
+    TextView addedClients;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +86,14 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
         ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,reps);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         setReps.setAdapter(adapter1);
+        setClients = findViewById(R.id.add_client_to_workout_spinner);
+        addClients = findViewById(R.id.add_client_to_workout_button);
+        addedClients = findViewById(R.id.list_clients_for_workout);
 
 
 
         if(currentUser != null){
+
             addExercise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -101,28 +113,42 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
             exerciseListAdapter = new ExerciseListAdapter(create_workout.this,exercises);
             exerciseList.setAdapter(exerciseListAdapter);
 
-            createWorkout.setOnClickListener(new View.OnClickListener() {
+            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                public void onClick(View view) {
-                    workout = new Workout(workoutName.getText().toString(), exercises);
-                    System.out.println(workout.getName());
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                    DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
-                    dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if(document.exists()){
-                                    //email.setText(document.getString("Username"));
-                                    Ptrainer ptrainer = document.toObject(Ptrainer.class);
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            ptrainer = document.toObject(Ptrainer.class);
+                            students = ptrainer.students;
+                            ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,students);
+                            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            setClients.setAdapter(adapter1);
+                            addClients.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Student state = (Student) setClients.getSelectedItem();
+                                    workoutstudents.add(state);
+                                    System.out.println(workoutstudents);
+                                    addedClients.setText("Added Clients\n"+workoutstudents.toString());
+                                }
+                            });
+
+                            createWorkout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    workout = new Workout(workoutName.getText().toString(), exercises);
+                                    workout.setStudents(workoutstudents);
                                     ptrainer.workouts.add(workout);
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer, SetOptions.merge());
                                 }
-                            }
+                            });
+
                         }
-                    });
+                    }
                 }
             });
 

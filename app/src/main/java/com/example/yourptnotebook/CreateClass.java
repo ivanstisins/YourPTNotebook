@@ -71,7 +71,6 @@ public class CreateClass extends AppCompatActivity {
                         if (document.exists()) {
                             ptrainer = document.toObject(Ptrainer.class);
                             workouts = ptrainer.workouts;
-                            students = ptrainer.students;
                             ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,workouts);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             setWorkout.setAdapter(adapter);
