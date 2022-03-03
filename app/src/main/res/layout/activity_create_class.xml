@@ -10,17 +10,14 @@
         android:id="@+id/className"
         android:layout_width="209dp"
         android:layout_height="45dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="201dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="112dp"
         android:background="@drawable/custom_textbox"
         android:ems="10"
         android:hint="Class Name"
         android:inputType="textPersonName"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,10 +33,10 @@
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.586"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/className"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintVertical_bias="0.056" />
 
     <RadioGroup
         android:id="@+id/class_type"
@@ -106,15 +103,30 @@
         app:layout_constraintTop_toBottomOf="@+id/select_workout" />
 
     <TextView
-        android:id="@+id/create_class_title"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         android:text="Create Class"
         android:textColor="@color/blue_100"
-        android:textSize="50dp"
+        android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/myClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="My Classes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/custom_button"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

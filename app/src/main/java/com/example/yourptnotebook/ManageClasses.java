@@ -1,5 +1,6 @@
 package com.example.yourptnotebook;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -24,18 +28,49 @@ import java.util.ArrayList;
 public class ManageClasses extends AppCompatActivity {
     private RecyclerView manageClassList;
     Ptrainer ptrainer;
+    Button addClient;
     ArrayList<Class> ptClassArrayList;
     ManageClassAdapter manageClassAdapter;
-    private ImageButton backbutton;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_classes);
+        bottomNavigationView=findViewById(R.id.bottom_nav_bar);
+        bottomNavigationView.setSelectedItemId(R.id.manage_classes);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profile:
+                        startActivity(new Intent(ManageClasses.this, Dashboard.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.manage_client:
+                        startActivity(new Intent(ManageClasses.this, ManageClients.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.manage_workout:
+                        startActivity(new Intent(ManageClasses.this, ManageWorkouts.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.logout:
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(ManageClasses.this, Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+
+                return false;
+            }
+        });
+        addClient = findViewById(R.id.create_class_button);
         manageClassList = findViewById(R.id.recyclerViewManageClasses);
         manageClassList.setHasFixedSize(true);
         manageClassList.setLayoutManager(new LinearLayoutManager(this));
-        backbutton = (ImageButton) findViewById(R.id.backbutton);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -62,17 +97,18 @@ public class ManageClasses extends AppCompatActivity {
                     }
                 }
             });
-            ptClassArrayList = new ArrayList<>();
-            manageClassAdapter = new ManageClassAdapter(ManageClasses.this,ptClassArrayList,ptrainer);
-            manageClassList.setAdapter(manageClassAdapter);
 
-            backbutton.setOnClickListener(new View.OnClickListener() {
+            addClient.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(ManageClasses.this, Dashboard.class);
+                    Intent intent = new Intent(ManageClasses.this, CreateClass.class);
                     startActivity(intent);
                 }
             });
+
+            ptClassArrayList = new ArrayList<>();
+            manageClassAdapter = new ManageClassAdapter(ManageClasses.this,ptClassArrayList,ptrainer);
+            manageClassList.setAdapter(manageClassAdapter);
 
         }
     }

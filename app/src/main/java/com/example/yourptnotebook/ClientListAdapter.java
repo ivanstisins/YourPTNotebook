@@ -22,6 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.MyViewHolder> {
 
@@ -56,14 +59,27 @@ public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.My
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
-                        if(document.exists()){
+                        if(document.exists()) {
                             ptrainer = document.toObject(Ptrainer.class);
+                            //.removeAll(new HashSet(ptrainer.students));
                             System.out.println(ptrainer.students);
+                            System.out.println(studentArrayList);
+
                             holder.addClientButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     //Log.d("demo", "user added "+student.getUsername());
                                     ptrainer.students.add(student);
+//                                    for (int i= 0; i< studentArrayList.size();i++) {
+//                                        for (int j = 0; j < ptrainer.students.size(); j++) {
+//                                            if (studentArrayList.get(i).username.equals(ptrainer.students.get(j).username)) {
+//                                                System.out.println("yes");
+//                                                studentArrayList.remove(studentArrayList.get(i));
+//                                            } else {
+//                                                System.out.println("no");
+//                                            }
+//                                        }
+//                                    }
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer,SetOptions.merge());
                                 }

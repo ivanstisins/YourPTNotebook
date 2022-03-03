@@ -16,29 +16,27 @@
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcometext"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/custom_logout_button"
-        android:text="Log out"
-        android:textColor="@color/white"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+<!--    <Button-->
+<!--        android:id="@+id/button_logout"-->
+<!--        android:layout_width="220dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="248dp"-->
+<!--        android:background="@drawable/custom_logout_button"-->
+<!--        android:text="Log out"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="25dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/createWorkOut"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
     <TextView
         android:id="@+id/welcometext"
@@ -58,21 +56,12 @@
         android:id="@+id/addClient"
         android:layout_width="109dp"
         android:layout_height="86dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="11dp"
         android:background="@drawable/addclient"
+        app:layout_constraintEnd_toStartOf="@+id/createClass"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/manageClient"
-        android:layout_width="109dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="148dp"
-        android:background="@drawable/manageclient"
-        app:layout_constraintStart_toEndOf="@+id/addClient"
         app:layout_constraintTop_toBottomOf="@+id/email"
         tools:ignore="MissingConstraints" />
 
@@ -80,44 +69,44 @@
         android:id="@+id/createClass"
         android:layout_width="109dp"
         android:layout_height="86dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="228dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/createclass"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addClient"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/ManageClasses"
-        android:layout_width="109dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/myclass"
-        app:layout_constraintStart_toEndOf="@+id/createClass"
-        app:layout_constraintTop_toBottomOf="@+id/manageClient"
+        app:layout_constraintEnd_toStartOf="@+id/createWorkOut"
+        app:layout_constraintStart_toEndOf="@+id/addClient"
+        app:layout_constraintTop_toBottomOf="@+id/welcometext"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/createWorkOut"
         android:layout_width="109dp"
         android:layout_height="86dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="228dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/createworkout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createClass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/createClass"
+        app:layout_constraintTop_toBottomOf="@+id/welcometext"
         tools:ignore="MissingConstraints" />
 
-    <ImageButton
-        android:id="@+id/manageWorkout"
-        android:layout_width="109dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/myworkouts"
-        app:layout_constraintStart_toEndOf="@+id/createWorkOut"
-        app:layout_constraintTop_toBottomOf="@+id/ManageClasses"
-        tools:ignore="MissingConstraints" />
+    <RelativeLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#620EE1"
+            app:menu="@menu/nav_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

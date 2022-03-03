@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile">
+    </item>
+
+
+    <item
+        android:id="@+id/manage_client"
+        android:icon="@drawable/ic_manage_clients"
+        android:title="Manage Client">
+    </item>
+
+
+    <item
+    android:id="@+id/manage_classes"
+    android:icon="@drawable/ic_manage_class"
+    android:title="Manage Class">
+    </item>
+
+
+    <item
+    android:id="@+id/manage_workout"
+    android:icon="@drawable/ic_manage_workout"
+    android:title="Manage Workout">
+    </item>
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout">
+    </item>
+
+</menu>

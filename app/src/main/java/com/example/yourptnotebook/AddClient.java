@@ -9,13 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -30,29 +33,67 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class AddClient extends AppCompatActivity {
     private RecyclerView clientList;
     Ptrainer ptrainer;
     ArrayList<Student> studentArrayList;
     ClientListAdapter clientListAdapter;
-    private ImageButton backbutton;
+    private Button myClients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_client);
         clientList = findViewById(R.id.recyclerView);
+
         clientList.setHasFixedSize(true);
         clientList.setLayoutManager(new LinearLayoutManager(this));
-        backbutton = (ImageButton) findViewById(R.id.backbutton);
+        myClients = findViewById(R.id.myClients);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         studentArrayList = new ArrayList<Student>();
+        ptrainer = new Ptrainer();
         clientListAdapter = new ClientListAdapter(AddClient.this, studentArrayList,ptrainer);
         clientList.setAdapter(clientListAdapter);
 
         if (currentUser != null) {
+
+            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if(document.exists()){
+                            //email.setText(document.getString("Username"));
+                            ptrainer = document.toObject(Ptrainer.class);
+
+                        }
+                    }
+//                    db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                        @Override
+//                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                            if(error != null){
+//                                Log.e("firestore error", error.getMessage());
+//                                return;
+//                            }
+//
+//                            for(DocumentChange dc : value.getDocumentChanges()){
+//                                if(dc.getType() == DocumentChange.Type.ADDED){
+//                                    studentArrayList.add(dc.getDocument().toObject(Student.class));
+//                                }
+//
+//                                clientListAdapter.notifyDataSetChanged();
+//
+//
+//                            }
+//
+//                        }
+//                    });
+                }
+            });
             db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -65,7 +106,6 @@ public class AddClient extends AppCompatActivity {
                         if(dc.getType() == DocumentChange.Type.ADDED){
                             studentArrayList.add(dc.getDocument().toObject(Student.class));
                         }
-
                         clientListAdapter.notifyDataSetChanged();
 
 
@@ -73,10 +113,10 @@ public class AddClient extends AppCompatActivity {
                 }
             });
 
-            backbutton.setOnClickListener(new View.OnClickListener() {
+            myClients.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AddClient.this, Dashboard.class);
+                    Intent intent = new Intent(AddClient.this, ManageClients.class);
                     startActivity(intent);
                 }
             });

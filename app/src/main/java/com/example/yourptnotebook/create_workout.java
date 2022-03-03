@@ -51,7 +51,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
     private RecyclerView exerciseList;
     Button createWorkout;
     Workout workout;
-    ImageButton backbutton;
+    Button myWorkouts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +64,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
         textView = new TextView(create_workout.this);
         setExerciseName = findViewById(R.id.setExerciseName);
         addExercise = findViewById(R.id.addExercise);
-        backbutton = findViewById(R.id.backbutton);
+        myWorkouts = findViewById(R.id.myWorkouts);
         createWorkout = findViewById(R.id.createWorkout);
         workoutName = findViewById(R.id.WorkoutName);
         exercises = new ArrayList<>();
@@ -126,11 +126,11 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                 }
             });
 
-            backbutton.setOnClickListener(new View.OnClickListener() {
+            myWorkouts.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     System.out.println("button is pressed");
-                    Intent intent = new Intent(create_workout.this, Dashboard.class);
+                    Intent intent = new Intent(create_workout.this, ManageWorkouts.class);
                     startActivity(intent);
                 }
             });
