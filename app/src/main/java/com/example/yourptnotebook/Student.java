@@ -120,4 +120,9 @@ public class Student {
     public boolean isRegistered() {
         return isRegistered;
     }
+
+    @Override
+    public String toString() {
+        return fullName;
+    }
 }

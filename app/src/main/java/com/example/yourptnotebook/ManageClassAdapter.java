@@ -50,6 +50,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
             holder.date.setText(aClass.classDate);
             holder.type.setText(aClass.type);
             holder.workout.setText(aClass.workout.name);
+            holder.clients.setText(aClass.students.toString());
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -86,6 +87,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
         TextView date;
         TextView type;
         TextView workout;
+        TextView clients;
         Button removeClassButton;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -95,6 +97,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
             type = itemView.findViewById(R.id.ptClassType);
             workout = itemView.findViewById(R.id.ptClassWorkout);
             removeClassButton = itemView.findViewById(R.id.RemoveClassButton);
+            clients = itemView.findViewById(R.id.ptClassClients);
         }
     }
 }

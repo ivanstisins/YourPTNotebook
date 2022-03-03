@@ -23,6 +23,10 @@ public class Class {
 
     public Class(){}
 
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+
     public String getName() {
         return name;
     }
