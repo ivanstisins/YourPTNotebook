@@ -47,7 +47,7 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
             Workout workout = ptWorkoutArrayList.get(position);
             holder.name.setText(workout.name);
             holder.exercises.setText(workout.exercises.toString());
-            holder.clients.setText(workout.students.toString());
+            holder.clients.setText(workout.students.toString()+"\n");
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override

@@ -44,7 +44,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
     Button addExercise;
     Spinner setSets;
     Spinner setReps;
-    Spinner setClients;
+    //Spinner setClients;
     Button addClients;
     EditText setExerciseName, workoutName;
     Exercise exercise;
@@ -58,6 +58,9 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
     ArrayList<Student> students;
     ArrayList<Student> workoutstudents = new ArrayList<>();
     TextView addedClients;
+    boolean[] selectedClients;
+    ArrayList<Integer> clientList = new ArrayList<>();
+    String[] clientArray;
 
 
     @Override
@@ -86,7 +89,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
         ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,reps);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         setReps.setAdapter(adapter1);
-        setClients = findViewById(R.id.add_client_to_workout_spinner);
+        //setClients = findViewById(R.id.add_client_to_workout_spinner);
         addClients = findViewById(R.id.add_client_to_workout_button);
         addedClients = findViewById(R.id.list_clients_for_workout);
 
@@ -123,22 +126,81 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                         if (document.exists()) {
                             ptrainer = document.toObject(Ptrainer.class);
                             students = ptrainer.students;
-                            ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,students);
-                            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            setClients.setAdapter(adapter1);
+                            clientArray = new String[students.size()];
+                            for(int i = 0; i< students.size();i++){
+                                clientArray[i] = students.get(i).fullName;
+                            }
+                            selectedClients = new boolean[clientArray.length];
+//                            ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,students);
+//                            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                            setClients.setAdapter(adapter1);
                             addClients.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Student state = (Student) setClients.getSelectedItem();
-                                    workoutstudents.add(state);
-                                    System.out.println(workoutstudents);
-                                    addedClients.setText("Added Clients\n"+workoutstudents.toString());
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(create_workout.this);
+                                    builder.setTitle("Add Clients to Class");
+                                    builder.setMultiChoiceItems(clientArray, selectedClients, new DialogInterface.OnMultiChoiceClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+                                            if(isChecked){
+                                                clientList.add(which);
+                                            }else{
+                                                clientList.remove((Integer.valueOf(which)));
+                                            }
+                                        }
+                                    });
+
+                                    builder.setCancelable(false);
+                                    builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int which) {
+                                            String clients = "";
+                                            for(int i = 0; i < clientList.size(); i++){
+                                                clients = clients + clientArray[clientList.get(i)];
+                                                if(i !=clientList.size()-1){
+                                                    clients = clients + ", ";
+                                                }
+                                            }
+                                            addedClients.setText(clients);
+                                        }
+                                    });
+
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    });
+                                    builder.setNeutralButton("Clear", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            for(int  j = 0; j < selectedClients.length; j++){
+                                                selectedClients[j] = false;
+                                                clientList.clear();
+                                                addedClients.setText("");
+                                            }
+                                        }
+                                    });
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+
                                 }
+//                                    Student state = (Student) setClients.getSelectedItem();
+//                                    workoutstudents.add(state);
+//                                    System.out.println(workoutstudents);
+//                                    addedClients.setText("Added Clients\n"+workoutstudents.toString());
                             });
 
                             createWorkout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    String clients = addedClients.getText().toString();
+                                    List<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
+                                    for (int i = 0; i < students.size(); i++) {
+                                        if (addedClients.contains(students.get(i).fullName)) {
+                                            workoutstudents.add(students.get(i));
+                                        }
+                                    }
                                     workout = new Workout(workoutName.getText().toString(), exercises);
                                     workout.setStudents(workoutstudents);
                                     ptrainer.workouts.add(workout);
