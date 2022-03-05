@@ -50,7 +50,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
             holder.date.setText(aClass.classDate);
             holder.type.setText(aClass.type);
             holder.workout.setText(aClass.workout.name);
-            holder.clients.setText(aClass.students.toString());
+            holder.clients.setText(aClass.students.toString()+"\n");
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
