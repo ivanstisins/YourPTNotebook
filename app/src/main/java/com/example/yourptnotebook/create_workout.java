@@ -138,7 +138,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                                 @Override
                                 public void onClick(View view) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(create_workout.this);
-                                    builder.setTitle("Add Clients to Class");
+                                    builder.setTitle("Add Clients to Workout");
                                     builder.setMultiChoiceItems(clientArray, selectedClients, new DialogInterface.OnMultiChoiceClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {

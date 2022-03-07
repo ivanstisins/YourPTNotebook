@@ -1,5 +1,6 @@
 package com.example.yourptnotebook;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
         return new MyViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ManageWorkoutAdapter.MyViewHolder holder, int position) {
         if(currentUser != null){
