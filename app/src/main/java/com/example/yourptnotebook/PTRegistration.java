@@ -83,18 +83,6 @@ public class PTRegistration extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-                   /*
-                    Map<String, Object> data = new HashMap<>();
-                    data.put("Username", username);
-                    data.put("FullName", name);
-                    data.put("Age", age);
-                    data.put("Gender", gender);
-                    data.put("GymName", gymname);
-                    data.put("Email", email);
-                    data.put("Password", password);
-                    data.put("id", mAuth.getCurrentUser().getUid());
-
-                    */
                     Ptrainer ptrainer = new Ptrainer(username,email,name,age,gender,gymname,password,
                             mAuth.getCurrentUser().getUid());
                     db.collection("ptrainer").document(mAuth.getCurrentUser().getUid()).set(ptrainer);

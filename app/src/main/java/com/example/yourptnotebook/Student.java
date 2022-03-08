@@ -1,5 +1,7 @@
 package com.example.yourptnotebook;
 
+import java.util.ArrayList;
+
 public class Student {
     String username;
     String email;
@@ -12,7 +14,8 @@ public class Student {
     String height;
     String weight;
     boolean isRegistered;
-
+    ArrayList<Workout> workouts;
+    ArrayList<Class> classes;
 
 
     public Student(String username, String email, String fullName, String gender, String gymName, String password, String id, String age, String height, String weight, boolean isRegistered) {
@@ -27,6 +30,8 @@ public class Student {
         this.height = height;
         this.weight = weight;
         this.isRegistered = isRegistered;
+        this.classes = new ArrayList<Class>();
+        this.workouts = new ArrayList<Workout>();
     }
 
     public  Student(){
@@ -115,6 +120,26 @@ public class Student {
 
     public String getWeight() {
         return weight;
+    }
+
+//    public void AddClasses(Class aClass) {
+//        this.classes.add(aClass);
+//    }
+
+    public void setClasses(ArrayList<Class> classes) {
+        this.classes = classes;
+    }
+
+    public ArrayList<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(ArrayList<Workout> workouts) {
+        this.workouts = workouts;
+    }
+
+    public ArrayList<Class> getClasses() {
+        return classes;
     }
 
     public boolean isRegistered() {

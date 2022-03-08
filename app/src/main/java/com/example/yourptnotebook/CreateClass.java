@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,14 +41,16 @@ public class CreateClass extends AppCompatActivity {
     RadioButton radioButton;
     Ptrainer ptrainer;
     ArrayList<Workout>workouts;
-    ArrayList<Student> students;
+    ArrayList<Student> students = new ArrayList<>();
     private Button myClasses;
     ArrayList<Student> classtudents = new ArrayList<>();
+    ArrayList<Student> studentClasses = new ArrayList<>();
     private Button addClientToClass;
     TextView classClientList;
     boolean[] selectedClients;
     ArrayList<Integer> clientList = new ArrayList<>();
     String[] clientArray;
+    Class studClass = new Class();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,21 +144,25 @@ public class CreateClass extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     String clients = classClientList.getText().toString();
-                                    List<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
-                                    for (int i = 0; i < students.size(); i++) {
-                                        if (addedClients.contains(students.get(i).fullName)) {
-                                             classtudents.add(students.get(i));
-                                        }
-                                    }
+                                    ArrayList<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
+//
                                     int radioId = setType.getCheckedRadioButtonId();
                                     radioButton = findViewById(radioId);
                                     Workout state = (Workout) setWorkout.getSelectedItem();
                                     aClass = new Class(className.getText().toString(), radioButton.getText().toString(),classDate.getText().toString(),ptrainer.getUsername(),state);
-                                    aClass.setStudents(classtudents);
+                                    aClass.setStudents(addedClients);
                                     ptrainer.classes.add(aClass);
-                                    db.collection("Class").document(aClass.getName()).set(aClass);
+//
+                                    for (int i = 0; i < students.size(); i++) {
+                                        if (addedClients.contains(students.get(i).fullName)) {
+                                            ptrainer.students.get(i).classes.add(aClass);
+                                        }
+                                    }
+
+                                    db.collection("Class").document(aClass.getName()).set(aClass,SetOptions.merge());
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer, SetOptions.merge());
+
                                 }
                             });
                         }

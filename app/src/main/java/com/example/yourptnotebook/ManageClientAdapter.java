@@ -46,9 +46,12 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
     @Override
     public void onBindViewHolder(@NonNull ManageClientAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (currentUser != null) {
+            String classes = "";
             Student student = ptStudentArrayList.get(position);
             holder.name.setText(student.fullName);
             holder.username.setText(student.username);
+            classes += student.classes;
+            holder.clientClasses.setText(classes);
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -85,12 +88,14 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
         TextView name;
         TextView username;
         Button removeClientButton;
+        TextView clientClasses;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.PtsclientName);
             username = itemView.findViewById(R.id.PtsclientUsername);
             removeClientButton = itemView.findViewById(R.id.RemoveclientButton);
+            clientClasses = itemView.findViewById(R.id.studClasses);
         }
     }
 }

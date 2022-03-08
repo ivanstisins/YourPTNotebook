@@ -8,7 +8,7 @@ public class Class {
     String name;
     String type;
     String classDate;
-    ArrayList<Student> students = new ArrayList<>();
+    ArrayList<String> students;
     Workout workout;
     String createdBy;
 
@@ -16,14 +16,16 @@ public class Class {
         this.name = name;
         this.type = type;
         this.classDate = classDate;
-        this.students = students;
+        this.students = new ArrayList<>();
         this.workout = workout;
         this.createdBy = createdBy;
     }
 
-    public Class(){}
+    public Class(){
 
-    public void setStudents(ArrayList<Student> students) {
+    }
+
+    public void setStudents(ArrayList<String> students) {
         this.students = students;
     }
 
@@ -43,11 +45,16 @@ public class Class {
         return createdBy;
     }
 
-    public ArrayList<Student> getStudents() {
+    public ArrayList<String> getStudents() {
         return students;
     }
 
     public Workout getWorkout() {
         return workout;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
