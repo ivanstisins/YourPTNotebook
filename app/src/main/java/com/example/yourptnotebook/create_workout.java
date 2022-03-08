@@ -185,10 +185,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                                     alertDialog.show();
 
                                 }
-//                                    Student state = (Student) setClients.getSelectedItem();
-//                                    workoutstudents.add(state);
-//                                    System.out.println(workoutstudents);
-//                                    addedClients.setText("Added Clients\n"+workoutstudents.toString());
+//
                             });
 
                             createWorkout.setOnClickListener(new View.OnClickListener() {
@@ -196,14 +193,14 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                                 public void onClick(View view) {
                                     String clients = addedClients.getText().toString();
                                     List<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
+
+                                    workout = new Workout(workoutName.getText().toString(), exercises);
+                                    ptrainer.workouts.add(workout);
                                     for (int i = 0; i < students.size(); i++) {
                                         if (addedClients.contains(students.get(i).fullName)) {
-                                            workoutstudents.add(students.get(i));
+                                            ptrainer.students.get(i).workouts.add(workout);
                                         }
                                     }
-                                    workout = new Workout(workoutName.getText().toString(), exercises);
-                                    workout.setStudents(workoutstudents);
-                                    ptrainer.workouts.add(workout);
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer, SetOptions.merge());
                                 }

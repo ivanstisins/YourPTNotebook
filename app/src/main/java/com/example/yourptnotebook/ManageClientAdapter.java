@@ -29,6 +29,7 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
     Ptrainer ptrainer;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    Student student;
 
     public ManageClientAdapter(Context context, Ptrainer ptrainer, ArrayList<Student> ptStudentArrayList) {
         this.context = context;
@@ -46,14 +47,14 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
     @Override
     public void onBindViewHolder(@NonNull ManageClientAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (currentUser != null) {
-            String classes = "";
-            Student student = ptStudentArrayList.get(position);
+          String classes = "";
+            student = ptStudentArrayList.get(position);
             holder.name.setText(student.fullName);
             holder.username.setText(student.username);
             classes += student.classes;
             holder.clientClasses.setText(classes);
-            db.collection("student").document(student.getEmail())
-                                            .set(student, SetOptions.merge());
+//            db.collection("student").document(student.getEmail())
+//                                            .set(student, SetOptions.merge());
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -61,7 +62,6 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                     if(task.isSuccessful()){
                         DocumentSnapshot document = task.getResult();
                         if(document.exists()){
-                            ptrainer = document.toObject(Ptrainer.class);
                             holder.removeClientButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {

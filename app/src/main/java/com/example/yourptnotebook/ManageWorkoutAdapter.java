@@ -49,7 +49,6 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
             Workout workout = ptWorkoutArrayList.get(position);
             holder.name.setText(workout.name);
             holder.exercises.setText(workout.exercises.toString());
-            holder.clients.setText(workout.students.toString()+"\n");
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -92,7 +91,6 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.woName);
-            clients = itemView.findViewById(R.id.woClients);
             exercises = itemView.findViewById(R.id.woExercises);
             removeWorkoutButton = itemView.findViewById(R.id.RemoveWorkoutButton);
         }
