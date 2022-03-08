@@ -52,6 +52,8 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
             holder.username.setText(student.username);
             classes += student.classes;
             holder.clientClasses.setText(classes);
+            db.collection("student").document(student.getEmail())
+                                            .set(student, SetOptions.merge());
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -67,6 +69,8 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                                     ptrainer.students = ptStudentArrayList;
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer, SetOptions.merge());
+//                                    db.collection("student").document(currentUser.getUid())
+//                                            .set(ptrainer, SetOptions.merge());
                                 }
                             });
                         }

@@ -66,8 +66,13 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
                                     ptrainer.classes = ptClassArrayList;
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer, SetOptions.merge());
+
+
+                                    db.collection("Class").document(aClass.getName())
+                                            .delete();
                                 }
                             });
+
                         }
                     }
                 }

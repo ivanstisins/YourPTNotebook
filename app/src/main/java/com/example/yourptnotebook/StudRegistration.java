@@ -83,7 +83,7 @@ public class StudRegistration extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     Student student = new Student(username,email,name,gender, gymname, password, mAuth.getCurrentUser().getUid(), age, height, weight,true);
-                    db.collection("student").document(mAuth.getCurrentUser().getUid()).set(student);
+                    db.collection("student").document(mAuth.getCurrentUser().getEmail()).set(student);
 
                 }
             }
