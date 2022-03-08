@@ -62,7 +62,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
                             holder.removeClassButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    //ptClassArrayList.remove(aClass);
+                                    ptClassArrayList.remove(aClass);
                                     ptrainer.classes = ptClassArrayList;
 
                                     db.collection("ptrainer").document(currentUser.getUid())

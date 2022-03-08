@@ -62,6 +62,7 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                     if(task.isSuccessful()){
                         DocumentSnapshot document = task.getResult();
                         if(document.exists()){
+                            ptrainer = document.toObject(Ptrainer.class);
                             holder.removeClientButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
