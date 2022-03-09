@@ -3,6 +3,7 @@ package com.example.yourptnotebook;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -103,6 +104,17 @@ public class ManageClients extends AppCompatActivity {
             ptStudentArrayList = new ArrayList<>();
             manageClientAdapter = new ManageClientAdapter(ManageClients.this,ptrainer,ptStudentArrayList);
             manageClientsList.setAdapter(manageClientAdapter);
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT ) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    manageClientAdapter.removeClient(viewHolder.getAdapterPosition());
+                }
+            }).attachToRecyclerView(manageClientsList);
 
             addClient.setOnClickListener(new View.OnClickListener() {
                 @Override

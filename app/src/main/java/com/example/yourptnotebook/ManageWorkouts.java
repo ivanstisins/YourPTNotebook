@@ -3,6 +3,7 @@ package com.example.yourptnotebook;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -99,6 +100,19 @@ public class ManageWorkouts extends AppCompatActivity {
             ptWorkoutArrayList = new ArrayList<>();
             manageWorkoutAdapter = new ManageWorkoutAdapter(ManageWorkouts.this,ptWorkoutArrayList);
             manageWorkoutList.setAdapter(manageWorkoutAdapter);
+
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    manageWorkoutAdapter.removeClass(viewHolder.getAdapterPosition());
+
+                }
+            }).attachToRecyclerView(manageWorkoutList);
 
 
         }

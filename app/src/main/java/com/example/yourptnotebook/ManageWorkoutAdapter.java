@@ -49,28 +49,29 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
             Workout workout = ptWorkoutArrayList.get(position);
             holder.name.setText(workout.name);
             holder.exercises.setText(workout.exercises.toString());
-            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
-            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()){
-                        DocumentSnapshot document = task.getResult();
-                        if(document.exists()){
-                            ptrainer = document.toObject(Ptrainer.class);
-                            holder.removeWorkoutButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    ptWorkoutArrayList.remove(workout);
-                                    ptrainer.workouts = ptWorkoutArrayList;
-                                    db.collection("ptrainer").document(currentUser.getUid())
-                                            .set(ptrainer, SetOptions.merge());
-                                }
-                            });
-                        }
+        }
+
+    }
+
+    public void removeClass(int position){
+        Workout workout = ptWorkoutArrayList.get(position);
+        DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        ptrainer = document.toObject(Ptrainer.class);
+                                ptWorkoutArrayList.remove(workout);
+                                ptrainer.workouts = ptWorkoutArrayList;
+                                db.collection("ptrainer").document(currentUser.getUid())
+                                        .set(ptrainer, SetOptions.merge());
+
                     }
                 }
-            });
-        }
+            }
+        });
 
     }
 
@@ -86,13 +87,11 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
         TextView name;
         TextView exercises;
         TextView clients;
-        Button removeWorkoutButton;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.woName);
             exercises = itemView.findViewById(R.id.woExercises);
-            removeWorkoutButton = itemView.findViewById(R.id.RemoveWorkoutButton);
         }
     }
 

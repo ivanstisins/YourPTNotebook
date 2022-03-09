@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 
 public class Dashboard extends AppCompatActivity {
-    private TextView email;
+    private TextView username, name;
     //private Button button_logout;
     private ImageButton addClient, createClass, createWorkout;
     BottomNavigationView bottomNavigationView;
@@ -36,7 +36,8 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
        // button_logout = (Button) findViewById(R.id.button_logout);
-        email = findViewById(R.id.email);
+        username = findViewById(R.id.username);
+        name = findViewById(R.id.name);
         addClient =(ImageButton) findViewById(R.id.addClient);
         createClass = (ImageButton) findViewById(R.id.createClass);
         createWorkout = (ImageButton) findViewById(R.id.createWorkOut);
@@ -86,7 +87,8 @@ public class Dashboard extends AppCompatActivity {
                         if(document.exists()){
                             //email.setText(document.getString("Username"));
                             Ptrainer ptrainer = document.toObject(Ptrainer.class);
-                            email.setText(ptrainer.getUsername());
+                            username.setText(ptrainer.getUsername());
+                            name.setText(ptrainer.getFullName());
 
                         }
                     }

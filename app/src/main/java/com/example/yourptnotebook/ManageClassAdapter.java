@@ -82,6 +82,31 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
         }
     }
 
+    public void removeClass(int position){
+        Class aClass = ptClassArrayList.get(position);
+        DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        ptrainer = document.toObject(Ptrainer.class);
+
+                                ptClassArrayList.remove(aClass);
+                                ptrainer.classes = ptClassArrayList;
+
+                                db.collection("ptrainer").document(currentUser.getUid())
+                                        .set(ptrainer, SetOptions.merge());
+
+                                db.collection("Class").document(aClass.getName())
+                                        .delete();
+                    }
+                }
+            }
+        });
+    }
+
     @Override
     public int getItemCount() {
         return ptClassArrayList.size();
