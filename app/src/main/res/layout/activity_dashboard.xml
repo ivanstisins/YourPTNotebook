@@ -113,12 +113,12 @@
     </RelativeLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView"
+        android:id="@+id/profilePicture"
         android:layout_width="116dp"
         android:layout_height="113dp"
         android:src="@drawable/ic_profile"
         app:civ_border_color="@color/blue_100"
-        app:civ_border_width="5dp"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"

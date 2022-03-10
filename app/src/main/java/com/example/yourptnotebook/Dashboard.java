@@ -1,18 +1,26 @@
 package com.example.yourptnotebook;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,22 +30,41 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Dashboard extends AppCompatActivity {
     private TextView username, name;
-    //private Button button_logout;
     private ImageButton addClient, createClass, createWorkout;
     BottomNavigationView bottomNavigationView;
+    CircleImageView profilePic;
+    FirebaseFirestore db;
+    StorageReference storageReference;
+    FirebaseAuth fAuth;
+    FirebaseUser currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-       // button_logout = (Button) findViewById(R.id.button_logout);
+        db = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference profileref = storageReference.child("users/"+fAuth.getInstance().getCurrentUser().getUid()+"/profile.jpg");
+        profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profilePic);
+            }
+        });
         username = findViewById(R.id.username);
         name = findViewById(R.id.name);
+        profilePic = findViewById(R.id.profilePicture);
         addClient =(ImageButton) findViewById(R.id.addClient);
         createClass = (ImageButton) findViewById(R.id.createClass);
         createWorkout = (ImageButton) findViewById(R.id.createWorkOut);
@@ -76,7 +103,7 @@ public class Dashboard extends AppCompatActivity {
                 return false;
             }
         });
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        currentUser = fAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -117,7 +144,50 @@ public class Dashboard extends AppCompatActivity {
                     finish();
                 }
             });
+
+            profilePic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(openGallery,1000);
+                }
+            });
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000){
+            if(resultCode == Activity.RESULT_OK){
+                Uri profileUri = data.getData();
+                //profilePic.setImageURI(profileUri);
+
+                uploadProfilePicture(profileUri);
+            }
+        }
+
+    }
+
+    private void uploadProfilePicture(Uri imageUri) {
+        StorageReference fileReferecne = storageReference.child("users/"+fAuth.getInstance().getCurrentUser().getUid()+"/profile.jpg");
+        fileReferecne.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileReferecne.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(profilePic);
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Dashboard.this,"Image Failed",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
