@@ -49,35 +49,13 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
             holder.name.setText(aClass.name);
             holder.date.setText(aClass.classDate);
             holder.type.setText(aClass.type);
-            holder.workout.setText(aClass.workout.name);
+            if(aClass.workout == null){
+                holder.workout.setText("no workouts assigned");
+            }
+            else {
+                holder.workout.setText(aClass.workout.name);
+            }
             holder.clients.setText(aClass.students.toString()+"\n");
-            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
-            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()){
-                        DocumentSnapshot document = task.getResult();
-                        if(document.exists()){
-                            ptrainer = document.toObject(Ptrainer.class);
-                            holder.removeClassButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    ptClassArrayList.remove(aClass);
-                                    ptrainer.classes = ptClassArrayList;
-
-                                    db.collection("ptrainer").document(currentUser.getUid())
-                                            .set(ptrainer, SetOptions.merge());
-
-
-                                    db.collection("Class").document(aClass.getName())
-                                            .delete();
-                                }
-                            });
-
-                        }
-                    }
-                }
-            });
 
         }
     }
@@ -93,13 +71,26 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
                     if(document.exists()){
                         ptrainer = document.toObject(Ptrainer.class);
 
-                                ptClassArrayList.remove(aClass);
-                                ptrainer.classes = ptClassArrayList;
 
-                                db.collection("ptrainer").document(currentUser.getUid())
+                        ptClassArrayList.remove(aClass);
+                        for(int s = 0; s < ptrainer.students.size(); s++){
+                            for(int c =0; c<ptrainer.students.get(s).classes.size();c++){
+                                if(ptrainer.students.get(s).classes.get(c).name.equals(aClass.name)){
+                                    ptrainer.students.get(s).classes.remove(c);
+                                }
+                            }
+                        }
+                        ptrainer.classes = ptClassArrayList;
+                        for (int i = 0; i < ptrainer.students.size(); i++) {
+                            if(ptrainer.classes.isEmpty()){
+                                ptrainer.students.get(i).classes.clear();
+                            }
+                        }
+
+                        db.collection("ptrainer").document(currentUser.getUid())
                                         .set(ptrainer, SetOptions.merge());
-
-                                db.collection("Class").document(aClass.getName())
+//
+                        db.collection("Class").document(aClass.getName())
                                         .delete();
                     }
                 }
@@ -119,7 +110,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
         TextView type;
         TextView workout;
         TextView clients;
-        Button removeClassButton;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -127,7 +118,6 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
             date = itemView.findViewById(R.id.ptClassDate);
             type = itemView.findViewById(R.id.ptClassType);
             workout = itemView.findViewById(R.id.ptClassWorkout);
-            removeClassButton = itemView.findViewById(R.id.RemoveClassButton);
             clients = itemView.findViewById(R.id.ptClassClients);
         }
     }

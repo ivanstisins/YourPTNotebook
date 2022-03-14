@@ -48,11 +48,14 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
     public void onBindViewHolder(@NonNull ManageClientAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (currentUser != null) {
           String classes = "";
+          String workouts ="";
             student = ptStudentArrayList.get(position);
             holder.name.setText(student.fullName);
             holder.username.setText(student.username);
             classes += student.classes;
+            workouts+= student.workouts;
             holder.clientClasses.setText(classes);
+            holder.clientWorkouts.setText(workouts);
         }
     }
 
@@ -68,11 +71,12 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                     if(document.exists()){
                         ptrainer = document.toObject(Ptrainer.class);
                                 ptStudentArrayList.remove(student);
+
                                 ptrainer.students = ptStudentArrayList;
                                 db.collection("ptrainer").document(currentUser.getUid())
                                         .set(ptrainer, SetOptions.merge());
-//                                    db.collection("student").document(currentUser.getUid())
-//                                            .set(ptrainer, SetOptions.merge());
+//                              db.collection("student").document(currentUser.getUid())
+//                                  .set(ptrainer, SetOptions.merge());
                     }
                 }
             }
@@ -92,12 +96,14 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
         TextView name;
         TextView username;
         TextView clientClasses;
+        TextView clientWorkouts;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.PtsclientName);
             username = itemView.findViewById(R.id.PtsclientUsername);
             clientClasses = itemView.findViewById(R.id.studClasses);
+            clientWorkouts = itemView.findViewById(R.id.studWokouts);
         }
     }
 }
