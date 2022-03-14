@@ -72,46 +72,49 @@ public class AddClient extends AppCompatActivity {
 
                         }
                     }
-//                    db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                            if(error != null){
-//                                Log.e("firestore error", error.getMessage());
-//                                return;
-//                            }
-//
-//                            for(DocumentChange dc : value.getDocumentChanges()){
-//                                if(dc.getType() == DocumentChange.Type.ADDED){
-//                                    studentArrayList.add(dc.getDocument().toObject(Student.class));
-//                                }
-//
-//                                clientListAdapter.notifyDataSetChanged();
-//
-//
-//                            }
-//
-//                        }
-//                    });
-                }
-            });
-            db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if(error != null){
-                        Log.e("firestore error", error.getMessage());
-                        return;
-                    }
+                    db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if(error != null){
+                                Log.e("firestore error", error.getMessage());
+                                return;
+                            }
 
-                    for(DocumentChange dc : value.getDocumentChanges()){
-                        if(dc.getType() == DocumentChange.Type.ADDED){
-                            studentArrayList.add(dc.getDocument().toObject(Student.class));
+                            for(DocumentChange dc : value.getDocumentChanges()){
+                                if(dc.getType() == DocumentChange.Type.ADDED){
+                                    studentArrayList.add(dc.getDocument().toObject(Student.class));
+                                }
+
+
+
+                                clientListAdapter.notifyDataSetChanged();
+
+
+                            }
+
                         }
-                        clientListAdapter.notifyDataSetChanged();
-
-
-                    }
+                    });
                 }
             });
+//            db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                @Override
+//                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                    if(error != null){
+//                        Log.e("firestore error", error.getMessage());
+//                        return;
+//                    }
+//
+//                    for(DocumentChange dc : value.getDocumentChanges()){
+//                        if(dc.getType() == DocumentChange.Type.ADDED){
+//                            studentArrayList.add(dc.getDocument().toObject(Student.class));
+//                        }
+//
+//                        clientListAdapter.notifyDataSetChanged();
+//
+//
+//                    }
+//                }
+//            });
 
             myClients.setOnClickListener(new View.OnClickListener() {
                 @Override
