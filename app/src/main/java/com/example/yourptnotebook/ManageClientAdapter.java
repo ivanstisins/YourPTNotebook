@@ -54,8 +54,20 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
             holder.username.setText(student.username);
             classes += student.classes;
             workouts+= student.workouts;
-            holder.clientClasses.setText(classes);
-            holder.clientWorkouts.setText(workouts);
+            if(student.classes.isEmpty()){
+                holder.clientClasses.setText("No Classes Assigned");
+            }
+            else{
+                holder.clientClasses.setText(classes);
+            }
+
+            if(student.workouts.isEmpty()){
+                holder.clientWorkouts.setText("No Workouts Assigned");
+            }
+            else {
+                holder.clientWorkouts.setText(workouts);
+            }
+
         }
     }
 

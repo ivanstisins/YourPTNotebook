@@ -50,10 +50,13 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
             holder.date.setText(aClass.classDate);
             holder.type.setText(aClass.type);
             if(aClass.workout == null){
-                holder.workout.setText("no workouts assigned");
+                holder.workout.setText("No Workouts Assigned");
             }
             else {
                 holder.workout.setText(aClass.workout.name);
+            }
+            if(aClass.students.isEmpty()){
+                holder.clients.setText("No Clients Assigned");
             }
             holder.clients.setText(aClass.students.toString()+"\n");
 

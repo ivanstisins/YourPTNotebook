@@ -109,7 +109,7 @@ public class ManageWorkouts extends AppCompatActivity {
 
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    manageWorkoutAdapter.removeClass(viewHolder.getAdapterPosition());
+                    manageWorkoutAdapter.removeWorkout(viewHolder.getAdapterPosition());
 
                 }
             }).attachToRecyclerView(manageWorkoutList);

@@ -53,7 +53,7 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
 
     }
 
-    public void removeClass(int position){
+    public void removeWorkout(int position){
         Workout workout = ptWorkoutArrayList.get(position);
         DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -63,10 +63,31 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){
                         ptrainer = document.toObject(Ptrainer.class);
-                                ptWorkoutArrayList.remove(workout);
-                                ptrainer.workouts = ptWorkoutArrayList;
-                                db.collection("ptrainer").document(currentUser.getUid())
+                        ptWorkoutArrayList.remove(workout);
+
+                        for(int s = 0; s < ptrainer.students.size(); s++){
+                            for(int w =0; w<ptrainer.students.get(s).workouts.size();w++){
+                                if(ptrainer.students.get(s).workouts.get(w).name.equals(workout.name)){
+                                    ptrainer.students.get(s).workouts.remove(w);
+                                }
+                            }
+                        }
+                        for(int c = 0; c < ptrainer.classes.size();c++){
+                            if(ptrainer.classes.get(c).workout.name.equals(workout.name)){
+                                ptrainer.classes.get(c).workout = null;
+                            }
+                        }
+
+
+                        ptrainer.workouts = ptWorkoutArrayList;
+                        for (int i = 0; i < ptrainer.students.size(); i++) {
+                            if(ptrainer.workouts.isEmpty()){
+                                ptrainer.students.get(i).workouts.clear();
+                            }
+                        }
+                        db.collection("ptrainer").document(currentUser.getUid())
                                         .set(ptrainer, SetOptions.merge());
+
 
                     }
                 }
