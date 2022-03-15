@@ -3,6 +3,7 @@ package com.example.yourptnotebook;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -112,9 +113,21 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
 
                 }
             });
+
             exercises = new ArrayList<>();
             exerciseListAdapter = new ExerciseListAdapter(create_workout.this,exercises);
             exerciseList.setAdapter(exerciseListAdapter);
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT ) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    exerciseListAdapter.removeExercice(viewHolder.getAdapterPosition());
+                }
+            }).attachToRecyclerView(exerciseList);
 
             DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -177,7 +190,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                                             for(int  j = 0; j < selectedClients.length; j++){
                                                 selectedClients[j] = false;
                                                 clientList.clear();
-                                                addedClients.setText("");
+                                                addedClients.setText("No Clients Added");
                                             }
                                         }
                                     });

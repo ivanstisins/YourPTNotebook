@@ -16,10 +16,11 @@
         android:layout_marginTop="156dp"
         android:gravity="center"
         android:text="Are you A"
+        android:textColor="@color/blue_100"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,10 +33,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginTop="24dp"
-        android:text="Student"
         android:background="@drawable/custom_button"
+        android:text="Client"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PTRegister" />
 
@@ -48,9 +49,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginTop="32dp"
-        android:text="Personal Trainer"
         android:background="@drawable/custom_button"
+        android:text="Personal Trainer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 

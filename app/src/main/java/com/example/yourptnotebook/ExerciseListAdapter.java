@@ -35,6 +35,13 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         holder.exercisen.setText(exercise.getName());
         holder.exercisese.setText(exercise.getSets());
         holder.exercisere.setText(exercise.getReps());
+
+    }
+
+    public void removeExercice(int position){
+        Exercise exercise = exercises.get(position);
+        exercises.remove(exercise);
+
     }
 
     @Override
@@ -47,6 +54,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         TextView exercisen;
         TextView exercisese;
         TextView exercisere;
+        Button removeExercise;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

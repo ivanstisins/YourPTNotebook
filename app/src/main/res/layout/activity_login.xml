@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
     android:background="@drawable/background"
-    >
+    tools:context=".Login">
 
     <TextView
         android:id="@+id/LoginTitle"
@@ -25,8 +24,8 @@
 
     <EditText
         android:id="@+id/LogUserEmail"
-        android:layout_width="221dp"
-        android:layout_height="34dp"
+        android:layout_width="270dp"
+        android:layout_height="42dp"
         android:layout_marginTop="92dp"
         android:background="@drawable/custom_textbox"
         android:drawableRight="@drawable/custom_email_icon"
@@ -36,14 +35,14 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LoginTitle" />
 
     <EditText
         android:id="@+id/LogPassword"
-        android:layout_width="221dp"
-        android:layout_height="34dp"
+        android:layout_width="270dp"
+        android:layout_height="42dp"
         android:layout_marginTop="34dp"
         android:background="@drawable/custom_textbox"
         android:drawableRight="@drawable/custom_password_icon"
@@ -53,7 +52,7 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LogUserEmail" />
 
@@ -65,7 +64,7 @@
         android:layout_marginTop="56dp"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LogPassword"
         tools:ignore="MissingConstraints" />
@@ -75,9 +74,10 @@
         android:layout_width="231dp"
         android:layout_height="22dp"
         android:layout_marginTop="20dp"
-        android:text="Dont have an account sign up here!"
         android:onClick="goToReg"
+        android:text="Dont have an account sign up here!"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LogButton" />
 
@@ -86,10 +86,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Back to main page"
         android:onClick="goToMain"
+        android:text="Back to main page"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toregister" />
 
