@@ -162,6 +162,9 @@ public class CreateClass extends AppCompatActivity {
                                     db.collection("Class").document(aClass.getName()).set(aClass,SetOptions.merge());
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer, SetOptions.merge());
+                                    Intent t= new Intent(CreateClass.this,CreateClass.class);
+                                    startActivity(t);
+                                    finish();
 
                                 }
                             });

@@ -216,6 +216,10 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                                     }
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer, SetOptions.merge());
+                                    Intent t= new Intent(create_workout.this,create_workout.class);
+                                    startActivity(t);
+                                    finish();
+
                                 }
                             });
 
