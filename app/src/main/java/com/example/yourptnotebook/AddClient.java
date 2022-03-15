@@ -83,8 +83,28 @@ public class AddClient extends AppCompatActivity {
                             for(DocumentChange dc : value.getDocumentChanges()){
                                 if(dc.getType() == DocumentChange.Type.ADDED){
                                     studentArrayList.add(dc.getDocument().toObject(Student.class));
-                                }
 
+//                                    for (int i= 0; i< studentArrayList.size();i++) {
+//                                        for (int j = 0; j < ptrainer.students.size(); j++) {
+//                                            if(studentArrayList.isEmpty()){
+//                                                continue;
+//                                            }
+//                                            if (studentArrayList.get(i).email.equals(ptrainer.students.get(j).email)) {
+//                                                if(ptrainer.students.isEmpty()){
+//                                                    continue;
+//                                                }
+//                                                System.out.println(studentArrayList.toString());;
+//                                                System.out.println(studentArrayList.size());
+//                                                studentArrayList.remove(i);
+//                                            } else {
+//                                                System.out.println("no");
+//                                            }
+//                                        }
+//                                    }
+
+
+
+                                }
 
 
                                 clientListAdapter.notifyDataSetChanged();
