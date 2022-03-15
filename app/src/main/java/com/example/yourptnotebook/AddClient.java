@@ -68,7 +68,7 @@ public class AddClient extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if(document.exists()){
                             //email.setText(document.getString("Username"));
-                            ptrainer = document.toObject(Ptrainer.class);
+                            ptrainer = document.toObject(Ptrainer.class);// wite database info to object
 
                         }
                     }
