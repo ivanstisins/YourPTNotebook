@@ -55,7 +55,7 @@
         android:id="@+id/setSetsSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/WorkoutName"
@@ -65,8 +65,8 @@
         android:id="@+id/setRepsSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WorkoutName" />
@@ -75,8 +75,8 @@
         android:id="@+id/setExerciseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="119dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="136dp"
         android:background="@drawable/custom_textbox"
         android:ems="10"
         android:hint="Exercise Name"
@@ -138,7 +138,7 @@
         android:id="@+id/add_client_to_workout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/custom_button2"
         android:text="Add Clients"
@@ -151,14 +151,37 @@
         android:id="@+id/list_clients_for_workout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
         android:text="No Clients Added"
         android:textColor="@color/black"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ExerciseList"
         app:layout_constraintTop_toBottomOf="@+id/add_client_to_workout_button" />
+
+    <TextView
+        android:id="@+id/identifySets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="9dp"
+        android:text="Sets"
+        android:textColor="@color/blue_100"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/setSetsSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/WorkoutName" />
+
+    <TextView
+        android:id="@+id/identifyReps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Reps"
+        android:textColor="@color/blue_100"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/setRepsSpinner"
+        app:layout_constraintStart_toStartOf="@+id/setRepsSpinner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
