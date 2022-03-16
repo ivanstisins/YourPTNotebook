@@ -47,36 +47,36 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/classDate"
-        app:layout_constraintVertical_bias="0.06"
+        app:layout_constraintVertical_bias="0.1"
         tools:ignore="MissingConstraints">
 
         <RadioButton
             android:id="@+id/group_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Group Class"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_selector"
-            android:elevation="4dp"
-            android:textColor="@color/white"
-            android:padding="8dp"
             android:layout_margin="8dp"
+            android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
+            android:elevation="4dp"
+            android:padding="8dp"
+            android:text="Group Class"
+            android:textColor="@color/white"
             tools:targetApi="lollipop" />
 
         <RadioButton
             android:id="@+id/one_on_one"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:text="1 on 1"
-            android:button="@android:color/transparent"
+            android:layout_margin="8dp"
             android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
             android:elevation="4dp"
             android:padding="8dp"
-            android:layout_margin="8dp"
+            android:text="1 on 1"
+            android:textColor="@color/white"
             tools:targetApi="lollipop" />
 
     </RadioGroup>
@@ -87,10 +87,10 @@
         android:layout_height="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/class_type"
-        app:layout_constraintVertical_bias="0.093"
+        app:layout_constraintVertical_bias="0.124"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -139,11 +139,10 @@
         android:id="@+id/add_client_to_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/custom_button"
         android:text="Add Client"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/select_workout" />
 
@@ -159,6 +158,32 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_client_to_class" />
+
+    <TextView
+        android:id="@+id/sel_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Select Class Type"
+        android:textColor="@color/blue_100"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/class_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/sel_workout_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Select Workout"
+        android:textSize="12sp"
+        android:textColor="@color/blue_100"
+        app:layout_constraintBottom_toTopOf="@+id/select_workout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <!--    <Spinner-->
