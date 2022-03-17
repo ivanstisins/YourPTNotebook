@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -69,7 +70,44 @@ public class StudRegistration extends AppCompatActivity {
                 gymname = String.valueOf(et_gymname.getText());
                 email = String.valueOf(et_email.getText());
                 password = String.valueOf(et_password.getText());
-                if(!name.equals("") && !username.equals("") && !age.equals("")&& !height.equals("")&& !weight.equals("") && !gender.equals("") && !gymname.equals("") && !email.equals("") && !password.equals("")){
+
+                if(TextUtils.isEmpty(name)){
+                    et_name.setError("Name can not be empty!");
+                    et_name.requestFocus();
+                }
+                else if(TextUtils.isEmpty(username)){
+                    et_username.setError("Username can not be empty!");
+                    et_username.requestFocus();
+                }
+                else if(TextUtils.isEmpty(age)){
+                    et_age.setError("Age can not be empty!");
+                    et_age.requestFocus();
+                }
+                else if(TextUtils.isEmpty(height)){
+                    et_height.setError("Height can not be empty!");
+                    et_height.requestFocus();
+                }
+                else if(TextUtils.isEmpty(weight)){
+                    et_weight.setError("Weight can not be empty!");
+                    et_weight.requestFocus();
+                }
+                else if(TextUtils.isEmpty(gender)){
+                    et_gender.setError("Gender can not be empty!");
+                    et_gender.requestFocus();
+                }
+                else if(TextUtils.isEmpty(gymname)){
+                    et_gymname.setError("Gym name can not be empty!");
+                    et_gymname.requestFocus();
+                }
+                else if(TextUtils.isEmpty(email)){
+                    et_email.setError("Email can not be empty!");
+                    et_email.requestFocus();
+                }
+                else if(TextUtils.isEmpty(password)){
+                    et_password.setError("Password can not be empty!");
+                    et_password.requestFocus();
+                }
+                else{
                     Studregister(name,username,age,height,weight,gender,gymname,email,password);
                 }
             }
