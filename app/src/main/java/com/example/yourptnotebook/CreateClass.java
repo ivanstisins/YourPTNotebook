@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -143,29 +144,37 @@ public class CreateClass extends AppCompatActivity {
                             createClass.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    String clients = classClientList.getText().toString();
-                                    ArrayList<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
-//
-                                    int radioId = setType.getCheckedRadioButtonId();
-                                    radioButton = findViewById(radioId);
-                                    Workout state = (Workout) setWorkout.getSelectedItem();
-                                    aClass = new Class(className.getText().toString(), radioButton.getText().toString(),classDate.getText().toString(),ptrainer.getUsername(),state);
-                                    aClass.setStudents(addedClients);
-                                    ptrainer.classes.add(aClass);
-//
-                                    for (int i = 0; i < students.size(); i++) {
-                                        if (addedClients.contains(students.get(i).fullName)) {
-                                            ptrainer.students.get(i).classes.add(aClass);
-                                        }
+                                    if(TextUtils.isEmpty(className.getText())){
+                                        className.setError("Please provide a class!");
+                                        className.requestFocus();
                                     }
+                                    else if(TextUtils.isEmpty(classDate.getText())){
+                                        classDate.setError("Provide class date");
+                                        classDate.requestFocus();
+                                    }
+                                    else{String clients = classClientList.getText().toString();
+                                        ArrayList<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
+                                        int radioId = setType.getCheckedRadioButtonId();
+                                        radioButton = findViewById(radioId);
+                                        Workout state = (Workout) setWorkout.getSelectedItem();
+                                        aClass = new Class(className.getText().toString(), radioButton.getText().toString(),classDate.getText().toString(),ptrainer.getUsername(),state);
+                                        aClass.setStudents(addedClients);
+                                        ptrainer.classes.add(aClass);
+//
+                                        for (int i = 0; i < students.size(); i++) {
+                                            if (addedClients.contains(students.get(i).fullName)) {
+                                                ptrainer.students.get(i).classes.add(aClass);
+                                            }
+                                        }
 
-                                    db.collection("Class").document(aClass.getName()).set(aClass,SetOptions.merge());
-                                    db.collection("ptrainer").document(currentUser.getUid())
-                                            .set(ptrainer, SetOptions.merge());
-                                    Intent t= new Intent(CreateClass.this,CreateClass.class);
-                                    startActivity(t);
-                                    finish();
+                                        db.collection("Class").document(aClass.getName()).set(aClass,SetOptions.merge());
+                                        db.collection("ptrainer").document(currentUser.getUid())
+                                                .set(ptrainer, SetOptions.merge());
+                                        Intent t= new Intent(CreateClass.this,CreateClass.class);
+                                        startActivity(t);
+                                        finish();
 
+                                    }
                                 }
                             });
                         }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +57,16 @@ public class Login extends AppCompatActivity {
                 public void onClick(View view) {
                     email = et_email.getText().toString();
                     password = et_password.getText().toString();
-                    if(!email.equals("") && !password.equals("")){
+
+                    if(TextUtils.isEmpty(email)){
+                        et_email.setError("Email can not be empty!");
+                        et_email.requestFocus();
+                    }
+                    else if(TextUtils.isEmpty(password)){
+                        et_password.setError("Password can not be empty!");
+                        et_password.requestFocus();
+                    }
+                    else{
                         loginUser(email,password);
                     }
                 }

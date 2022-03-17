@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -102,15 +103,20 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                 @Override
                 public void onClick(View view) {
                     String strsetExerciseName = setExerciseName.getText().toString();
-                    String strSets = setSets.getSelectedItem().toString();
-                    String strReps = setReps.getSelectedItem().toString();
-                    exercise = new Exercise();
-                    exercise.setName(strsetExerciseName);
-                    exercise.setSets(strSets);
-                    exercise.setReps(strReps);
-                    exercises.add(exercise);
-                    exerciseListAdapter.notifyDataSetChanged();
-
+                    if(TextUtils.isEmpty(strsetExerciseName)){
+                        setExerciseName.setError("Please provide a Exercise name!");
+                        setExerciseName.requestFocus();
+                    }
+                    else {
+                        String strSets = setSets.getSelectedItem().toString();
+                        String strReps = setReps.getSelectedItem().toString();
+                        exercise = new Exercise();
+                        exercise.setName(strsetExerciseName);
+                        exercise.setSets(strSets);
+                        exercise.setReps(strReps);
+                        exercises.add(exercise);
+                        exerciseListAdapter.notifyDataSetChanged();
+                    }
                 }
             });
 
@@ -204,21 +210,27 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                             createWorkout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    String clients = addedClients.getText().toString();
-                                    List<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
-
-                                    workout = new Workout(workoutName.getText().toString(), exercises);
-                                    ptrainer.workouts.add(workout);
-                                    for (int i = 0; i < students.size(); i++) {
-                                        if (addedClients.contains(students.get(i).fullName)) {
-                                            ptrainer.students.get(i).workouts.add(workout);
-                                        }
+                                    if(TextUtils.isEmpty(workoutName.getText())){
+                                        workoutName.setError("Please a Workout name!");
+                                        workoutName.requestFocus();
                                     }
-                                    db.collection("ptrainer").document(currentUser.getUid())
-                                            .set(ptrainer, SetOptions.merge());
-                                    Intent t= new Intent(create_workout.this,create_workout.class);
-                                    startActivity(t);
-                                    finish();
+                                    else {
+                                        String clients = addedClients.getText().toString();
+                                        List<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
+
+                                        workout = new Workout(workoutName.getText().toString(), exercises);
+                                        ptrainer.workouts.add(workout);
+                                        for (int i = 0; i < students.size(); i++) {
+                                            if (addedClients.contains(students.get(i).fullName)) {
+                                                ptrainer.students.get(i).workouts.add(workout);
+                                            }
+                                        }
+                                        db.collection("ptrainer").document(currentUser.getUid())
+                                                .set(ptrainer, SetOptions.merge());
+                                        Intent t = new Intent(create_workout.this, create_workout.class);
+                                        startActivity(t);
+                                        finish();
+                                    }
 
                                 }
                             });
