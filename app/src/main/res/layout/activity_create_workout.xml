@@ -31,25 +31,28 @@
 
     <Button
         android:id="@+id/addExercise"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
         android:background="@drawable/custom_button2"
         android:text="add Exercise"
         app:layout_constraintBottom_toTopOf="@+id/createWorkout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/createWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/custom_button2"
         android:text="create workout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/addExercise" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/setSetsSpinner"
@@ -59,7 +62,8 @@
         android:layout_marginEnd="24dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/WorkoutName"
-        app:layout_constraintTop_toBottomOf="@+id/WorkoutName" />
+        app:layout_constraintTop_toBottomOf="@+id/WorkoutName"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/setRepsSpinner"
@@ -69,7 +73,8 @@
         android:layout_marginEnd="16dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/WorkoutName" />
+        app:layout_constraintTop_toBottomOf="@+id/WorkoutName"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/setExerciseName"
@@ -108,7 +113,7 @@
         android:layout_marginTop="2dp"
         android:text=" Create Workout"
         android:textColor="@color/blue_100"
-        android:textSize="33dp"
+        android:textSize="33sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -124,8 +129,8 @@
 
     <Button
         android:id="@+id/myWorkouts"
-        android:layout_width="120dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="6dp"
         android:text="My Workouts"
