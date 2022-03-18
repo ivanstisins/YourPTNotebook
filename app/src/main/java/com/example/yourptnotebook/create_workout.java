@@ -225,6 +225,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                                                 ptrainer.students.get(i).workouts.add(workout);
                                             }
                                         }
+                                        db.collection("Workouts").document(workout.getName()).set(workout,SetOptions.merge());
                                         db.collection("ptrainer").document(currentUser.getUid())
                                                 .set(ptrainer, SetOptions.merge());
                                         Intent t = new Intent(create_workout.this, create_workout.class);
