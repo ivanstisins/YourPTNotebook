@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,15 +63,18 @@ public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.My
                         DocumentSnapshot document = task.getResult();
                         if(document.exists()) {
                             ptrainer = document.toObject(Ptrainer.class);
-                            //.removeAll(new HashSet(ptrainer.students));
-                            //System.out.println(ptrainer.students);
-                            //System.out.println(studentArrayList);
 
                             holder.addClientButton.setOnClickListener(new View.OnClickListener() {
+                                @SuppressLint("NotifyDataSetChanged")
                                 @Override
                                 public void onClick(View view) {
-                                    //Log.d("demo", "user added "+student.getUsername());
                                     ptrainer.students.add(student);
+                                    for(int i = 0; i < ptrainer.students.size();i++){
+                                        if(student.username.equals(ptrainer.students.get(i).username)){
+                                            studentArrayList.remove(student);
+                                            notifyDataSetChanged();
+                                        }
+                                    }
                                     db.collection("ptrainer").document(currentUser.getUid())
                                             .set(ptrainer,SetOptions.merge());
                                 }
@@ -84,7 +88,7 @@ public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.My
 
     @Override
     public int getItemCount() {
-        return studentArrayList.size();
+        return this.studentArrayList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
