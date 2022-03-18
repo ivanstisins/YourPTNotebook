@@ -7,33 +7,33 @@
     <item
         android:id="@+id/manage_client"
         android:icon="@drawable/ic_manage_clients"
-        android:title="Manage Client">
+        android:title="">
     </item>
 
 
     <item
     android:id="@+id/manage_classes"
     android:icon="@drawable/ic_manage_class"
-    android:title="Manage Class">
+    android:title="">
     </item>
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_profile"
-        android:title="Profile">
+        android:title="">
     </item>
 
 
     <item
     android:id="@+id/manage_workout"
     android:icon="@drawable/ic_manage_workout"
-    android:title="Manage Workout">
+    android:title="">
     </item>
 
     <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_logout"
-        android:title="Logout">
+        android:title="">
     </item>
 
 </menu>
