@@ -87,6 +87,8 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
                         }
                         db.collection("ptrainer").document(currentUser.getUid())
                                         .set(ptrainer, SetOptions.merge());
+                        db.collection("Workouts").document(workout.getName())
+                                .delete();
 
 
                     }
