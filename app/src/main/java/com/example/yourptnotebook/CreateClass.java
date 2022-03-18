@@ -44,8 +44,6 @@ public class CreateClass extends AppCompatActivity {
     ArrayList<Workout>workouts;
     ArrayList<Student> students = new ArrayList<>();
     private Button myClasses;
-    ArrayList<Student> classtudents = new ArrayList<>();
-    ArrayList<Student> studentClasses = new ArrayList<>();
     private Button addClientToClass;
     TextView classClientList;
     boolean[] selectedClients;

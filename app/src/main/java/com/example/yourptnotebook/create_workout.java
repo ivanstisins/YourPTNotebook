@@ -3,6 +3,7 @@ package com.example.yourptnotebook;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
@@ -41,12 +43,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class create_workout extends AppCompatActivity /*implements CreateExercise.CreateExerciseInterface*/{
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
+public class create_workout extends AppCompatActivity{
     TextView textView;
     Button addExercise;
     Spinner setSets;
     Spinner setReps;
-    //Spinner setClients;
     Button addClients;
     EditText setExerciseName, workoutName;
     Exercise exercise;
@@ -58,7 +61,6 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
     Button myWorkouts;
     Ptrainer ptrainer;
     ArrayList<Student> students;
-    ArrayList<Student> workoutstudents = new ArrayList<>();
     TextView addedClients;
     boolean[] selectedClients;
     ArrayList<Integer> clientList = new ArrayList<>();
@@ -134,6 +136,16 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                     exerciseListAdapter.removeExercice(viewHolder.getAdapterPosition());
                     exerciseListAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                    new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                            .addBackgroundColor(ContextCompat.getColor(create_workout.this, R.color.red))
+                            .addActionIcon(R.drawable.ic_delete)
+                            .create()
+                            .decorate();
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                 }
             }).attachToRecyclerView(exerciseList);
 
