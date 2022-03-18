@@ -100,6 +100,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
         if(currentUser != null){
 
             addExercise.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onClick(View view) {
                     String strsetExerciseName = setExerciseName.getText().toString();
@@ -115,8 +116,8 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                         exercise.setSets(strSets);
                         exercise.setReps(strReps);
                         exercises.add(exercise);
-                        exerciseListAdapter.notifyDataSetChanged();
                     }
+                    exerciseListAdapter.notifyDataSetChanged();
                 }
             });
 
@@ -132,6 +133,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                     exerciseListAdapter.removeExercice(viewHolder.getAdapterPosition());
+                    exerciseListAdapter.notifyDataSetChanged();
                 }
             }).attachToRecyclerView(exerciseList);
 
@@ -150,9 +152,7 @@ public class create_workout extends AppCompatActivity /*implements CreateExercis
                                 clientArray[i] = students.get(i).fullName;
                             }
                             selectedClients = new boolean[clientArray.length];
-//                            ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,students);
-//                            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                            setClients.setAdapter(adapter1);
+//
                             addClients.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {

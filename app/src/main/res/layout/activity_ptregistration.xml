@@ -11,13 +11,13 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="4dp"
         android:text="Personal Trainer Registration"
         android:textColor="@color/blue_100"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -155,13 +155,12 @@
 
     <TextView
         android:id="@+id/texTlogin"
-        android:layout_width="239dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="258dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:onClick="goToLogIn"
         android:text="Already have an account log in here!"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PTsignUp" />
 
