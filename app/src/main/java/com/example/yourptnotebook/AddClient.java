@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,12 +68,12 @@ public class AddClient extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if(document.exists()){
-                            //email.setText(document.getString("Username"));
                             ptrainer = document.toObject(Ptrainer.class);// wite database info to object
 
                         }
                     }
                     db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @SuppressLint("NotifyDataSetChanged")
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                             if(error != null){
@@ -83,32 +84,19 @@ public class AddClient extends AppCompatActivity {
                             for(DocumentChange dc : value.getDocumentChanges()){
                                 if(dc.getType() == DocumentChange.Type.ADDED){
                                     studentArrayList.add(dc.getDocument().toObject(Student.class));
-
-//                                    for (int i= 0; i< studentArrayList.size();i++) {
-//                                        for (int j = 0; j < ptrainer.students.size(); j++) {
-//                                            if(studentArrayList.isEmpty()){
-//                                                continue;
-//                                            }
-//                                            if (studentArrayList.get(i).email.equals(ptrainer.students.get(j).email)) {
-//                                                if(ptrainer.students.isEmpty()){
-//                                                    continue;
-//                                                }
-//                                                System.out.println(studentArrayList.toString());;
-//                                                System.out.println(studentArrayList.size());
-//                                                studentArrayList.remove(i);
-//                                            } else {
-//                                                System.out.println("no");
-//                                            }
-//                                        }
-//                                    }
-
-
+//
+                                    for(Student s : studentArrayList){
+                                        for(Student s1 : ptrainer.students){
+                                            if(s.username.equals(s1.username)){
+                                                studentArrayList.remove(s);
+                                                clientListAdapter.notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
 
                                 }
 
-
                                 clientListAdapter.notifyDataSetChanged();
-
 
                             }
 
@@ -116,25 +104,7 @@ public class AddClient extends AppCompatActivity {
                     });
                 }
             });
-//            db.collection("student").addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                @Override
-//                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                    if(error != null){
-//                        Log.e("firestore error", error.getMessage());
-//                        return;
-//                    }
-//
-//                    for(DocumentChange dc : value.getDocumentChanges()){
-//                        if(dc.getType() == DocumentChange.Type.ADDED){
-//                            studentArrayList.add(dc.getDocument().toObject(Student.class));
-//                        }
-//
-//                        clientListAdapter.notifyDataSetChanged();
-//
-//
-//                    }
-//                }
-//            });
+
 
             myClients.setOnClickListener(new View.OnClickListener() {
                 @Override
