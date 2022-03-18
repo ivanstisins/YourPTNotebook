@@ -45,21 +45,24 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
     @Override
     public void onBindViewHolder(@NonNull ManageClassAdapter.MyViewHolder holder, int position) {
         if (currentUser != null) {
+            String clientString = "";
             Class aClass = ptClassArrayList.get(position);
             holder.name.setText(aClass.name);
             holder.date.setText(aClass.classDate);
             holder.type.setText(aClass.type);
+            clientString += aClass.students;
             if(aClass.workout == null){
                 holder.workout.setText("No Workouts Assigned");
             }
             else {
                 holder.workout.setText(aClass.workout.name);
             }
-            if(aClass.students.isEmpty()){
+            if(aClass.students.get(0).equals("")){
                 holder.clients.setText("No Clients Assigned");
             }
-            holder.clients.setText(aClass.students.toString()+"\n");
-
+            else {
+                holder.clients.setText(clientString);
+            }
         }
     }
 

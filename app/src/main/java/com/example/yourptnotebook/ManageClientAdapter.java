@@ -84,7 +84,6 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                         ptrainer = document.toObject(Ptrainer.class);
                                 ptStudentArrayList.remove(student);
                                 ptrainer.students = ptStudentArrayList;
-                                //ptrainer.students = new ArrayList<Student>(ptStudentArrayList);
                                 db.collection("ptrainer").document(currentUser.getUid())
                                         .set(ptrainer, SetOptions.merge());
 //                              db.collection("student").document(currentUser.getUid())
