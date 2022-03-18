@@ -33,7 +33,7 @@
         android:background="@drawable/custom_textbox"
         android:ems="10"
         android:hint="Date"
-        android:inputType="date"
+        android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/class_type"
