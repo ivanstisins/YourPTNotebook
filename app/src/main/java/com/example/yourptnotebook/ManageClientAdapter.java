@@ -83,8 +83,6 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                     if(document.exists()){
                         ptrainer = document.toObject(Ptrainer.class);
                                 ptStudentArrayList.remove(student);
-
-
                                 for(int i = 0; i < ptrainer.classes.size();i++){
                                  if(ptrainer.students.isEmpty()){
                                      ptrainer.classes.get(i).students.clear();
@@ -94,6 +92,9 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                                     for (int s = 0; s< ptrainer.classes.get(c).students.size();s++){
                                         if(ptrainer.classes.get(c).students.get(s).equals(student.fullName)){
                                             ptrainer.classes.get(c).students.remove(s);
+                                            db.collection("Class").document(ptrainer.classes.get(c).name)
+                                                    .set(ptrainer.classes.get(c), SetOptions.merge());
+
                                         }
                                     }
                                 }
