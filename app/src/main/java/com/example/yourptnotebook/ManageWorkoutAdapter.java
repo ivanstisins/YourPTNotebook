@@ -83,6 +83,7 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
                         for (int i = 0; i < ptrainer.students.size(); i++) {
                             if(ptrainer.workouts.isEmpty()){
                                 ptrainer.students.get(i).workouts.clear();
+                                db.collection("student").document(ptrainer.students.get(i).email).set(ptrainer.students.get(i),SetOptions.merge());
                             }
                         }
                         db.collection("ptrainer").document(currentUser.getUid())

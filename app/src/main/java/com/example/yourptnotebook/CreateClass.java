@@ -162,6 +162,7 @@ public class CreateClass extends AppCompatActivity {
                                         for (int i = 0; i < students.size(); i++) {
                                             if (addedClients.contains(students.get(i).fullName)) {
                                                 ptrainer.students.get(i).classes.add(aClass);
+                                                db.collection("student").document(ptrainer.students.get(i).email).set(ptrainer.students.get(i),SetOptions.merge());
                                             }
                                         }
 

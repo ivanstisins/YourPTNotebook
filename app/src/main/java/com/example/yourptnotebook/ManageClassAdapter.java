@@ -87,6 +87,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
                             for(int c =0; c<ptrainer.students.get(s).classes.size();c++){
                                 if(ptrainer.students.get(s).classes.get(c).name.equals(aClass.name)){
                                     ptrainer.students.get(s).classes.remove(c);
+                                    db.collection("student").document(ptrainer.students.get(s).email).set(ptrainer.students.get(s),SetOptions.merge());
                                 }
                             }
                         }

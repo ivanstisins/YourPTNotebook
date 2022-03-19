@@ -100,8 +100,10 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                                 ptrainer.students = ptStudentArrayList;
                                 db.collection("ptrainer").document(currentUser.getUid())
                                         .set(ptrainer, SetOptions.merge());
-//                              db.collection("student").document(currentUser.getUid())
-//                                  .set(ptrainer, SetOptions.merge());
+                                student.classes.clear();
+                                student.workouts.clear();
+                              db.collection("student").document(student.email)
+                                  .set(student, SetOptions.merge());
                     }
                 }
             }
