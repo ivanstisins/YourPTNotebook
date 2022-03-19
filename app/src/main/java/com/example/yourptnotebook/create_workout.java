@@ -232,11 +232,14 @@ public class create_workout extends AppCompatActivity{
 
                                         workout = new Workout(workoutName.getText().toString(), exercises);
                                         ptrainer.workouts.add(workout);
+
                                         for (int i = 0; i < students.size(); i++) {
                                             if (addedClients.contains(students.get(i).fullName)) {
                                                 ptrainer.students.get(i).workouts.add(workout);
+                                                db.collection("student").document(ptrainer.students.get(i).email).set(ptrainer.students.get(i),SetOptions.merge());
                                             }
                                         }
+
                                         db.collection("Workouts").document(workout.getName()).set(workout,SetOptions.merge());
                                         db.collection("ptrainer").document(currentUser.getUid())
                                                 .set(ptrainer, SetOptions.merge());
