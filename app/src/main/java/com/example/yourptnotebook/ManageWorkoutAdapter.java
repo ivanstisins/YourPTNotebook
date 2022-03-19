@@ -75,6 +75,8 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
                         for(int c = 0; c < ptrainer.classes.size();c++){
                             if(ptrainer.classes.get(c).workout.name.equals(workout.name)){
                                 ptrainer.classes.get(c).workout = null;
+                                db.collection("Class").document(ptrainer.classes.get(c).name)
+                                        .set(ptrainer.classes.get(c), SetOptions.merge());
                             }
                         }
 
