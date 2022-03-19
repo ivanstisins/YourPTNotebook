@@ -57,7 +57,11 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
             else {
                 holder.workout.setText(aClass.workout.name);
             }
-            if(aClass.students.get(0).equals("")){
+
+            if(aClass.students.isEmpty()){
+                holder.clients.setText("No Clients Assigned");
+            }
+            else if(aClass.students.get(0).equals("")){
                 holder.clients.setText("No Clients Assigned");
             }
             else {
