@@ -46,9 +46,15 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
     @Override
     public void onBindViewHolder(@NonNull ManageWorkoutAdapter.MyViewHolder holder, int position) {
         if(currentUser != null){
+            String exercises ="";
             Workout workout = ptWorkoutArrayList.get(position);
             holder.name.setText(workout.name);
             holder.exercises.setText(workout.exercises.toString());
+            for(int i = 0; i< workout.exercises.size();i++){
+                exercises += workout.exercises.get(i).toString();
+                //holder.exercise.setText(workout.exercises.get(i).toString());
+            }
+            holder.exercises.setText(exercises);
         }
 
     }
@@ -85,7 +91,7 @@ public class ManageWorkoutAdapter extends RecyclerView.Adapter<ManageWorkoutAdap
                         for (int i = 0; i < ptrainer.students.size(); i++) {
                             if(ptrainer.workouts.isEmpty()){
                                 ptrainer.students.get(i).workouts.clear();
-                                db.collection("student").document(ptrainer.students.get(i).email).set(ptrainer.students.get(i),SetOptions.merge());
+                                db.collection("student").document(ptrainer.students.get(i).username).set(ptrainer.students.get(i),SetOptions.merge());
                             }
                         }
                         db.collection("ptrainer").document(currentUser.getUid())
