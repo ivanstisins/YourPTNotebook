@@ -40,6 +40,6 @@ public class Exercise {
 
     @Override
     public String toString() {
-        return "Name: "+name+"\n"+"Sets: "+sets+"\n"+"Reps: "+reps+"\n";
+        return "Name: "+name+" Sets: "+sets+" Reps: "+reps+"\n";
     }
 }

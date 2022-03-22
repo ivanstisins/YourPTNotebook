@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class ManageClients extends AppCompatActivity {
+public class ManageClients extends AppCompatActivity implements RecyclerViewInterface {
     private RecyclerView manageClientsList;
     Ptrainer ptrainer;
     ArrayList<Student> ptStudentArrayList;
@@ -92,7 +93,7 @@ public class ManageClients extends AppCompatActivity {
                     }
 
                     for(DocumentChange dc : value.getDocumentChanges()){
-                            ptrainer = dc.getDocument().toObject(Ptrainer.class);
+                        ptrainer = dc.getDocument().toObject(Ptrainer.class);
 
                         if(dc.getType() == DocumentChange.Type.ADDED){
                             for(Student s : ptrainer.getStudents()){
@@ -106,7 +107,7 @@ public class ManageClients extends AppCompatActivity {
                 }
             });
             ptStudentArrayList = new ArrayList<>();
-            manageClientAdapter = new ManageClientAdapter(ManageClients.this,ptrainer,ptStudentArrayList);
+            manageClientAdapter = new ManageClientAdapter(ManageClients.this,ptrainer,ptStudentArrayList,this);
             manageClientsList.setAdapter(manageClientAdapter);
             new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT ) {
                 @Override
@@ -139,5 +140,16 @@ public class ManageClients extends AppCompatActivity {
             });
 
         }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(ManageClients.this, ClientCard.class);
+        intent.putExtra("Name",ptStudentArrayList.get(position).fullName);
+        intent.putExtra("Username",ptStudentArrayList.get(position).username);
+        intent.putExtra("Height",ptStudentArrayList.get(position).height);
+        intent.putExtra("Weight",ptStudentArrayList.get(position).weight);
+        intent.putExtra("Age",ptStudentArrayList.get(position).age);
+        startActivity(intent);
     }
 }

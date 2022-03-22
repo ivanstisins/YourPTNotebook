@@ -25,48 +25,33 @@ import java.util.ArrayList;
 public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapter.MyViewHolder>{
 
     Context context;
+    private final RecyclerViewInterface recyclerViewInterface;
     ArrayList<Student> ptStudentArrayList;
     Ptrainer ptrainer;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     Student student;
 
-    public ManageClientAdapter(Context context, Ptrainer ptrainer, ArrayList<Student> ptStudentArrayList) {
+    public ManageClientAdapter(Context context, Ptrainer ptrainer, ArrayList<Student> ptStudentArrayList, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.ptrainer = ptrainer;
         this.ptStudentArrayList = ptStudentArrayList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.manage_client_ist,parent,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view,recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ManageClientAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (currentUser != null) {
-          String classes = "";
-          String workouts ="";
             student = ptStudentArrayList.get(position);
             holder.name.setText(student.fullName);
             holder.username.setText(student.username);
-            classes += student.classes;
-            workouts+= student.workouts;
-            if(student.classes.isEmpty()){
-                holder.clientClasses.setText("No Classes Assigned");
-            }
-            else{
-                holder.clientClasses.setText(classes);
-            }
-
-            if(student.workouts.isEmpty()){
-                holder.clientWorkouts.setText("No Workouts Assigned");
-            }
-            else {
-                holder.clientWorkouts.setText(workouts);
-            }
 
         }
     }
@@ -103,7 +88,7 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                                         .set(ptrainer, SetOptions.merge());
                                 student.classes.clear();
                                 student.workouts.clear();
-                              db.collection("student").document(student.email)
+                              db.collection("student").document(student.username)
                                   .set(student, SetOptions.merge());
                     }
                 }
@@ -123,15 +108,24 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
 
         TextView name;
         TextView username;
-        TextView clientClasses;
-        TextView clientWorkouts;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             name = itemView.findViewById(R.id.PtsclientName);
             username = itemView.findViewById(R.id.PtsclientUsername);
-            clientClasses = itemView.findViewById(R.id.studClasses);
-            clientWorkouts = itemView.findViewById(R.id.studWokouts);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(recyclerViewInterface != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
+
         }
     }
 }

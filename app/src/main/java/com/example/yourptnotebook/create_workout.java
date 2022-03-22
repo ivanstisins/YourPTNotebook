@@ -236,7 +236,7 @@ public class create_workout extends AppCompatActivity{
                                         for (int i = 0; i < students.size(); i++) {
                                             if (addedClients.contains(students.get(i).fullName)) {
                                                 ptrainer.students.get(i).workouts.add(workout);
-                                                db.collection("student").document(ptrainer.students.get(i).email).set(ptrainer.students.get(i),SetOptions.merge());
+                                                db.collection("student").document(ptrainer.students.get(i).username).set(ptrainer.students.get(i),SetOptions.merge());
                                             }
                                         }
 
