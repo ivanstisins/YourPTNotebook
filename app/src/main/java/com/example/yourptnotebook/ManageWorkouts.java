@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class ManageWorkouts extends AppCompatActivity {
+public class ManageWorkouts extends AppCompatActivity implements RecyclerViewInterface {
     private RecyclerView manageWorkoutList;
     Ptrainer ptrainer;
     ArrayList<Workout> ptWorkoutArrayList;
@@ -102,7 +102,7 @@ public class ManageWorkouts extends AppCompatActivity {
                 }
             });
             ptWorkoutArrayList = new ArrayList<>();
-            manageWorkoutAdapter = new ManageWorkoutAdapter(ManageWorkouts.this,ptWorkoutArrayList);
+            manageWorkoutAdapter = new ManageWorkoutAdapter(ManageWorkouts.this,ptWorkoutArrayList,this);
             manageWorkoutList.setAdapter(manageWorkoutAdapter);
 
             new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -139,5 +139,12 @@ public class ManageWorkouts extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(ManageWorkouts.this,WorkoutCard.class);
+        intent.putExtra("Name",ptWorkoutArrayList.get(position).name);
+        startActivity(intent);
     }
 }

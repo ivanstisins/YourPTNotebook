@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YourPTNoteBook">
         <activity
+            android:name=".WorkoutCard"
+            android:exported="false" />
+        <activity
             android:name=".ClientCard"
             android:exported="false" />
         <activity

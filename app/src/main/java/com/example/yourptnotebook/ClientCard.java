@@ -32,16 +32,16 @@ import java.util.ArrayList;
 
 public class ClientCard extends AppCompatActivity {
     TextView clientCardName, clientCardUsername, clientCardAge,clientCardWeight,clientCardHeight;
-    Student student;
     Button removeClient;
     FirebaseFirestore db;
-    StorageReference storageReference;
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
     Ptrainer ptrainer;
+
     RecyclerView cardClientClassesList;
     CardClientClassAdapter cardClientClassAdapter;
     ArrayList<Class> classArrayList;
+
     RecyclerView cardClientWorkoutsList;
     CardClientWorkoutAdapter cardClientWorkoutAdapter;
     ArrayList<Workout> workoutArrayList;
