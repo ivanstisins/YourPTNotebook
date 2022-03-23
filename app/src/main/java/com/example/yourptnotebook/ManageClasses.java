@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class ManageClasses extends AppCompatActivity {
+public class ManageClasses extends AppCompatActivity implements RecyclerViewInterface{
     private RecyclerView manageClassList;
     Ptrainer ptrainer;
     Button addClient;
@@ -112,7 +112,7 @@ public class ManageClasses extends AppCompatActivity {
             });
 
             ptClassArrayList = new ArrayList<>();
-            manageClassAdapter = new ManageClassAdapter(ManageClasses.this,ptClassArrayList,ptrainer);
+            manageClassAdapter = new ManageClassAdapter(ManageClasses.this,ptClassArrayList,ptrainer,this);
             manageClassList.setAdapter(manageClassAdapter);
 
             new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -137,5 +137,17 @@ public class ManageClasses extends AppCompatActivity {
                 }
             }).attachToRecyclerView(manageClassList);
         }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(ManageClasses.this, ClassCard.class);
+        intent.putExtra("Name",ptClassArrayList.get(position).name);
+        intent.putExtra("Date",ptClassArrayList.get(position).classDate);
+        intent.putExtra("Type",ptClassArrayList.get(position).type);
+        intent.putExtra("Workout",ptClassArrayList.get(position).workout.name);
+        startActivity(intent);
+
+
     }
 }

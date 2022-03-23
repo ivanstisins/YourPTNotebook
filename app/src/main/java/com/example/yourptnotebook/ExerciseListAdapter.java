@@ -54,7 +54,6 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         TextView exercisen;
         TextView exercisese;
         TextView exercisere;
-        Button removeExercise;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

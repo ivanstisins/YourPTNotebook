@@ -32,7 +32,6 @@ import java.util.Map;
 
 public class StudRegistration extends AppCompatActivity {
     private EditText et_name, et_username, et_age,et_height,et_weight,et_gender,et_gymname, et_email, et_password;
-    //private String URL = "http://10.0.2.2:80/YOurPTNoteBook/Stud_register.php";
     private String name,username,age,height,weight,gender,gymname,email,password;
     private Button register;
     private DocumentReference db;
