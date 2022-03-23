@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddClient">
 
-    <!--        app:srcCompat="@drawable/custom_button"-->
-
-
     <Button
         android:id="@+id/myClients"
         android:layout_width="wrap_content"

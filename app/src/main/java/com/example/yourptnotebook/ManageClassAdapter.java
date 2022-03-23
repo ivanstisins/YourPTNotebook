@@ -25,21 +25,23 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
 
     Context context;
     ArrayList<Class> ptClassArrayList;
+    private final RecyclerViewInterface recyclerViewInterface;
     Ptrainer ptrainer;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    public ManageClassAdapter(Context context, ArrayList<Class> ptClassArrayList, Ptrainer ptrainer) {
+    public ManageClassAdapter(Context context, ArrayList<Class> ptClassArrayList, Ptrainer ptrainer,RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.ptClassArrayList = ptClassArrayList;
         this.ptrainer = ptrainer;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
     @Override
     public ManageClassAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.manage_class_list,parent,false);
-        return new ManageClassAdapter.MyViewHolder(view);
+        return new ManageClassAdapter.MyViewHolder(view,recyclerViewInterface);
     }
 
     @Override
@@ -126,13 +128,25 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
         TextView clients;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             name = itemView.findViewById(R.id.ptClassName);
             date = itemView.findViewById(R.id.ptClassDate);
             type = itemView.findViewById(R.id.ptClassType);
             workout = itemView.findViewById(R.id.ptClassWorkout);
             clients = itemView.findViewById(R.id.ptClassClients);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(recyclerViewInterface != null){
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }

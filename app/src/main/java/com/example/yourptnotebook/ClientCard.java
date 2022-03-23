@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,6 +47,11 @@ public class ClientCard extends AppCompatActivity {
     CardClientWorkoutAdapter cardClientWorkoutAdapter;
     ArrayList<Workout> workoutArrayList;
 
+    ViewFlipper viewFlipper;
+
+    Button viewClasses;
+    Button viewWorkouts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,10 @@ public class ClientCard extends AppCompatActivity {
         removeClient = findViewById(R.id.cardRemoveClient);
         cardClientClassesList = findViewById(R.id.cardClientClasses);
         cardClientWorkoutsList = findViewById(R.id.cardClientWorkouts);
+        viewFlipper = findViewById(R.id.view_flip);
+        viewClasses = findViewById(R.id.viewClasses);
+        viewWorkouts = findViewById(R.id.viewWorkouts);
+
 
         clientCardName.setText(name);
         clientCardUsername.setText(username);
@@ -154,8 +164,32 @@ public class ClientCard extends AppCompatActivity {
             workoutArrayList = new ArrayList<>();
             cardClientWorkoutAdapter = new CardClientWorkoutAdapter(ClientCard.this, workoutArrayList,ptrainer);
             cardClientWorkoutsList.setAdapter(cardClientWorkoutAdapter);
+
+            viewClasses.setTextColor(getResources().getColor(R.color.second_color));
+
         }
 
 
     }
+
+    public void seeClasses(View view){
+        viewFlipper.setDisplayedChild(0);
+        changeButtonColor(view);
+    }
+    public void seeWorkouts(View view){
+        viewFlipper.setDisplayedChild(1);
+        changeButtonColor(view);
+    }
+
+    public void changeButtonColor(View view){
+        if(viewFlipper.getDisplayedChild()==0){
+            viewClasses.setTextColor(getResources().getColor(R.color.second_color));
+            viewWorkouts.setTextColor(getResources().getColor(R.color.blue_100));
+        }
+        else {
+            viewClasses.setTextColor(getResources().getColor(R.color.blue_100));
+            viewWorkouts.setTextColor(getResources().getColor(R.color.second_color));
+        }
+    }
+
 }

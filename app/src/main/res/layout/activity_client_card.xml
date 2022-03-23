@@ -127,49 +127,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardClientHeight" />
 
-    <TextView
-        android:id="@+id/textView15"
+    <Button
+        android:id="@+id/viewClasses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:text="Clients Classes"
+        android:layout_marginStart="44dp"
+        android:background="@android:color/transparent"
+        android:onClick="seeClasses"
+        android:text="Classes"
         android:textColor="@color/blue_100"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView4"
+        tools:textStyle="bold" />
+
+    <Button
+        android:id="@+id/viewWorkouts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:background="@android:color/transparent"
+        android:onClick="seeWorkouts"
+        android:text="Workouts"
+        android:textColor="@color/blue_100"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circleImageView4" />
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="10dp"
-        android:text="Clients Workouts"
-        android:textColor="@color/blue_100"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardClientClasses" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cardClientClasses"
+    <ViewFlipper
+        android:id="@+id/view_flip"
         android:layout_width="0dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="6dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/viewClasses"
+        android:inAnimation="@android:anim/slide_in_left"
+        >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cardClientWorkouts"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cardClientClasses"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cardClientWorkouts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
+
+
+    </ViewFlipper>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

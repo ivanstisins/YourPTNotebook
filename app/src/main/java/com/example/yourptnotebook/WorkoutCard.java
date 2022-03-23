@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +47,12 @@ public class WorkoutCard extends AppCompatActivity {
     CardWorkoutClassAdapter cardWorkoutClassAdapter;
     ArrayList<Class> classArrayList;
 
+    ViewFlipper viewFlipper;
+
+    Button viewExercise;
+    Button viewClass;
+    Button viewClients;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,11 @@ public class WorkoutCard extends AppCompatActivity {
         cardWorkoutExerciseList = findViewById(R.id.workoutCardExercises);
         cardWorkoutClientList = findViewById(R.id.workoutCardClients);
         cardWorkoutClassList = findViewById(R.id.workoutCardClasses);
+        viewFlipper = findViewById(R.id.workout_view_flip);
+        viewExercise = findViewById(R.id.viewExercises);
+        viewClass = findViewById(R.id.viewWorkoutClassses);
+        viewClients = findViewById(R.id.viewWorkoutClients);
+
 
         workoutCardName.setText(name);
 
@@ -168,7 +180,44 @@ public class WorkoutCard extends AppCompatActivity {
             cardWorkoutClassAdapter = new CardWorkoutClassAdapter(WorkoutCard.this,classArrayList,ptrainer);
             cardWorkoutClassList.setAdapter(cardWorkoutClassAdapter);
 
+            viewExercise.setTextColor(getResources().getColor(R.color.second_color));
 
+
+        }
+    }
+
+    public void seeExercises(View view){
+        viewFlipper.setDisplayedChild(0);
+        changeButtonColor(view);
+    }
+
+
+    public void seeWorkoutsClasses(View view){
+        viewFlipper.setDisplayedChild(1);
+        changeButtonColor(view);
+    }
+
+    public void seeClients(View view){
+        viewFlipper.setDisplayedChild(2);
+        changeButtonColor(view);
+    }
+
+    public void changeButtonColor(View view){
+        if(viewFlipper.getDisplayedChild()==0){
+            viewExercise.setTextColor(getResources().getColor(R.color.second_color));
+            viewClass.setTextColor(getResources().getColor(R.color.blue_100));
+            viewClients.setTextColor(getResources().getColor(R.color.blue_100));
+        }
+
+        else if(viewFlipper.getDisplayedChild()==1){
+            viewExercise.setTextColor(getResources().getColor(R.color.blue_100));
+            viewClass.setTextColor(getResources().getColor(R.color.second_color));
+            viewClients.setTextColor(getResources().getColor(R.color.blue_100));
+        }
+        else {
+            viewExercise.setTextColor(getResources().getColor(R.color.blue_100));
+            viewClass.setTextColor(getResources().getColor(R.color.blue_100));
+            viewClients.setTextColor(getResources().getColor(R.color.second_color));
         }
     }
 }

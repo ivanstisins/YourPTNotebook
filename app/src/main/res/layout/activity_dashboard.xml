@@ -8,22 +8,6 @@
     android:background="@drawable/dashboardbackground">
 
 
-    <!--    <Button-->
-<!--        android:id="@+id/button_logout"-->
-<!--        android:layout_width="220dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginTop="248dp"-->
-<!--        android:background="@drawable/custom_logout_button"-->
-<!--        android:text="Log out"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="25dp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.497"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/createWorkOut"-->
-<!--        tools:ignore="MissingConstraints" />-->
-
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
