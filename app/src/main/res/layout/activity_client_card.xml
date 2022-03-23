@@ -124,6 +124,7 @@
         android:layout_marginTop="1dp"
         android:background="@android:color/transparent"
         android:text="X"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardClientHeight" />
 

@@ -64,6 +64,7 @@
             android:padding="8dp"
             android:text="Group Class"
             android:textColor="@color/white"
+            android:textStyle="bold"
             tools:targetApi="lollipop" />
 
         <RadioButton
@@ -77,6 +78,7 @@
             android:padding="8dp"
             android:text="1 on 1"
             android:textColor="@color/white"
+            android:textStyle="bold"
             tools:targetApi="lollipop" />
 
     </RadioGroup>
@@ -100,6 +102,7 @@
         android:layout_marginBottom="18dp"
         android:background="@drawable/custom_button2"
         android:text="create class"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -139,6 +142,7 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/custom_button"
         android:text="Add Client"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/select_workout"
         app:layout_constraintTop_toBottomOf="@+id/select_workout" />
 
