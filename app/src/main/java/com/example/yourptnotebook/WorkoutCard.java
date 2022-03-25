@@ -72,7 +72,6 @@ public class WorkoutCard extends AppCompatActivity {
         viewClass = findViewById(R.id.viewWorkoutClassses);
         viewClients = findViewById(R.id.viewWorkoutClients);
 
-
         workoutCardName.setText(name);
 
         cardWorkoutExerciseList.setHasFixedSize(true);
@@ -84,9 +83,10 @@ public class WorkoutCard extends AppCompatActivity {
         cardWorkoutClassList.setHasFixedSize(true);
         cardWorkoutClassList.setLayoutManager(new LinearLayoutManager(this));
 
-        currentUser = fAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if(currentUser != null){
+
             db.collection("ptrainer").addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -99,10 +99,13 @@ public class WorkoutCard extends AppCompatActivity {
                         ptrainer = dc.getDocument().toObject(Ptrainer.class);
 
                         if(dc.getType() == DocumentChange.Type.ADDED){
+
+
                             for(Workout w : ptrainer.workouts){
                                 if(w.name.equals(workoutCardName.getText())) {
                                     for (Exercise e : w.exercises) {
                                         exerciseArrayList.add(e);
+                                        cardWorkoutExercisesAdapter.notifyDataSetChanged();
                                     }
                                 }
                             }
@@ -110,6 +113,7 @@ public class WorkoutCard extends AppCompatActivity {
                                 for(Workout w: s.workouts){
                                     if(w.name.equals(workoutCardName.getText())){
                                         clientArrayList.add(s);
+                                        cardWorkoutClientAdapter.notifyDataSetChanged();
                                     }
                                 }
                             }
@@ -117,14 +121,11 @@ public class WorkoutCard extends AppCompatActivity {
                             for(Class c: ptrainer.classes){
                                     if(c.workout.name.equals(workoutCardName.getText())){
                                         classArrayList.add(c);
+                                        cardWorkoutClassAdapter.notifyDataSetChanged();
                                     }
                                 }
-
                         }
 
-                        cardWorkoutExercisesAdapter.notifyDataSetChanged();
-                        cardWorkoutClientAdapter.notifyDataSetChanged();
-                        cardWorkoutClassAdapter.notifyDataSetChanged();
 
 
                     }
@@ -144,6 +145,9 @@ public class WorkoutCard extends AppCompatActivity {
                             }
 
                             for(int c = 0; c < ptrainer.classes.size();c++){
+                                if(ptrainer.classes.get(c).workout == null){
+                                    continue;
+                                }
                                 if(ptrainer.classes.get(c).workout.name.equals(workoutCardName.getText())){
                                     ptrainer.classes.get(c).workout = null;
                                     db.collection("Class").document(ptrainer.classes.get(c).name)

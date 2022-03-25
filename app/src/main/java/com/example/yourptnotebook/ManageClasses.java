@@ -17,10 +17,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -80,28 +84,24 @@ public class ManageClasses extends AppCompatActivity implements RecyclerViewInte
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
-            db.collection("ptrainer").addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if(error != null){
-                        Log.e("firestore error", error.getMessage());
-                        return;
-                    }
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        ptrainer = document.toObject(Ptrainer.class);
 
-                    for(DocumentChange dc : value.getDocumentChanges()){
-                        ptrainer = dc.getDocument().toObject(Ptrainer.class);
-
-                        if(dc.getType() == DocumentChange.Type.ADDED){
-                            for(Class c : ptrainer.getClasses()){
-                                ptClassArrayList.add(c);
-                            }
+                        for(Class c : ptrainer.getClasses()){
+                            ptClassArrayList.add(c);
+                            manageClassAdapter.notifyDataSetChanged();
                         }
-                        manageClassAdapter.notifyDataSetChanged();
-
 
                     }
                 }
             });
+
 
             addClient.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -145,9 +145,15 @@ public class ManageClasses extends AppCompatActivity implements RecyclerViewInte
         intent.putExtra("Name",ptClassArrayList.get(position).name);
         intent.putExtra("Date",ptClassArrayList.get(position).classDate);
         intent.putExtra("Type",ptClassArrayList.get(position).type);
-        intent.putExtra("Workout",ptClassArrayList.get(position).workout.name);
-        startActivity(intent);
 
+        if(ptClassArrayList.get(position).workout == null){
+            intent.putExtra("Workout","No Workout Assigned");
+            startActivity(intent);
+        }
+        else {
+            intent.putExtra("Workout", ptClassArrayList.get(position).workout.name);
+            startActivity(intent);
+        }
 
     }
 }

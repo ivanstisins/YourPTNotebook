@@ -30,6 +30,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 
@@ -84,24 +85,19 @@ public class ManageClients extends AppCompatActivity implements RecyclerViewInte
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            db.collection("ptrainer").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if(error != null){
-                        Log.e("firestore error", error.getMessage());
-                        return;
-                    }
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                         ptrainer = document.toObject(Ptrainer.class);
 
-                    for(DocumentChange dc : value.getDocumentChanges()){
-                        ptrainer = dc.getDocument().toObject(Ptrainer.class);
-
-                        if(dc.getType() == DocumentChange.Type.ADDED){
-                            for(Student s : ptrainer.getStudents()){
+                        for(Student s : ptrainer.getStudents()){
                                 ptStudentArrayList.add(s);
                             }
-                        }
-                        manageClientAdapter.notifyDataSetChanged();
 
+                        manageClientAdapter.notifyDataSetChanged();
 
                     }
                 }

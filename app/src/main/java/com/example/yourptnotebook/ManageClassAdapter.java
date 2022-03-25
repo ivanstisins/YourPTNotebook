@@ -88,6 +88,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
 
 
                         ptClassArrayList.remove(aClass);
+                        notifyDataSetChanged();
                         for(int s = 0; s < ptrainer.students.size(); s++){
                             for(int c =0; c<ptrainer.students.get(s).classes.size();c++){
                                 if(ptrainer.students.get(s).classes.get(c).name.equals(aClass.name)){
@@ -105,7 +106,7 @@ public class ManageClassAdapter extends RecyclerView.Adapter<ManageClassAdapter.
 
                         db.collection("ptrainer").document(currentUser.getUid())
                                         .set(ptrainer, SetOptions.merge());
-//
+
                         db.collection("Class").document(aClass.getName())
                                         .delete();
                     }
