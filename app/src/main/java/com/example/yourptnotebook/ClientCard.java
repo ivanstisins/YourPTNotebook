@@ -90,7 +90,7 @@ public class ClientCard extends AppCompatActivity {
         cardClientWorkoutsList.setHasFixedSize(true);
         cardClientWorkoutsList.setLayoutManager(new LinearLayoutManager(this));
 
-        currentUser = fAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null) {
             db.collection("ptrainer").addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override

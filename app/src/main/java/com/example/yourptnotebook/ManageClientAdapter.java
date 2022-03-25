@@ -68,6 +68,7 @@ public class ManageClientAdapter extends RecyclerView.Adapter<ManageClientAdapte
                     if(document.exists()){
                         ptrainer = document.toObject(Ptrainer.class);
                                 ptStudentArrayList.remove(student);
+                                notifyDataSetChanged();
                                 for(int i = 0; i < ptrainer.classes.size();i++){
                                  if(ptrainer.students.isEmpty()){
                                      ptrainer.classes.get(i).students.clear();

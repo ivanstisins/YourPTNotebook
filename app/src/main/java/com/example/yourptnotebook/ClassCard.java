@@ -1,6 +1,7 @@
 
 package com.example.yourptnotebook;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,9 +14,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -78,38 +83,40 @@ public class ClassCard extends AppCompatActivity {
         cardClassClientList.setHasFixedSize(true);
         cardClassClientList.setLayoutManager(new LinearLayoutManager(this));
 
-        currentUser = fAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null) {
+            DocumentReference dr = db.collection("ptrainer").document(currentUser.getUid());
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        ptrainer = document.toObject(Ptrainer.class);
 
-        db.collection("ptrainer").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                for(DocumentChange dc : value.getDocumentChanges()) {
-                    ptrainer = dc.getDocument().toObject(Ptrainer.class);
-
-                    if (dc.getType() == DocumentChange.Type.ADDED) {
                         for (Class c : ptrainer.classes) {
+                            if(c.workout == null){
+                                break;
+                            }
                             if (c.name.equals(classCardName.getText())) {
                                 for (Exercise e : c.workout.exercises) {
-                                        exerciseArrayList.add(e);
+                                    exerciseArrayList.add(e);
+                                    cardClassWorkoutExercisesAdapter.notifyDataSetChanged();
                                 }
+
                             }
                         }
-                        for(Class c : ptrainer.classes){
-                            if(c.name.equals(classCardName.getText())){
-                                for(String s: c.students){
+                        for (Class c : ptrainer.classes) {
+                            if (c.name.equals(classCardName.getText())) {
+                                for (String s : c.students) {
                                     clientArrayList.add(s);
+                                    cardClassClientsAdapter.notifyDataSetChanged();
                                 }
                             }
                         }
-
-
                     }
-                    cardClassWorkoutExercisesAdapter.notifyDataSetChanged();
-                    cardClassClientsAdapter.notifyDataSetChanged();
                 }
-
-                removeClass.setOnClickListener(new View.OnClickListener() {
+            });
+            removeClass.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -141,8 +148,11 @@ public class ClassCard extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-            }
-        });
+
+        }
+
+
+
         exerciseArrayList = new ArrayList<>();
         cardClassWorkoutExercisesAdapter = new CardClassWorkoutExercisesAdapter(ClassCard.this,exerciseArrayList,ptrainer);
         cardClassWorkoutExerciseList.setAdapter(cardClassWorkoutExercisesAdapter);
