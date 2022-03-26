@@ -61,7 +61,7 @@ public class create_workout extends AppCompatActivity{
     Button myWorkouts;
     Ptrainer ptrainer;
     ArrayList<Student> students;
-    TextView addedClients;
+    String addedClients;
     boolean[] selectedClients;
     ArrayList<Integer> clientList = new ArrayList<>();
     String[] clientArray;
@@ -95,7 +95,7 @@ public class create_workout extends AppCompatActivity{
         setReps.setAdapter(adapter1);
         //setClients = findViewById(R.id.add_client_to_workout_spinner);
         addClients = findViewById(R.id.add_client_to_workout_button);
-        addedClients = findViewById(R.id.list_clients_for_workout);
+        //addedClients = findViewById(R.id.list_clients_for_workout);
 
 
 
@@ -192,7 +192,7 @@ public class create_workout extends AppCompatActivity{
                                                     clients = clients + ", ";
                                                 }
                                             }
-                                            addedClients.setText(clients);
+                                            addedClients += clients;
                                         }
                                     });
 
@@ -208,7 +208,6 @@ public class create_workout extends AppCompatActivity{
                                             for(int  j = 0; j < selectedClients.length; j++){
                                                 selectedClients[j] = false;
                                                 clientList.clear();
-                                                addedClients.setText("No Clients Added");
                                             }
                                         }
                                     });
@@ -227,7 +226,7 @@ public class create_workout extends AppCompatActivity{
                                         workoutName.requestFocus();
                                     }
                                     else {
-                                        String clients = addedClients.getText().toString();
+                                        String clients = addedClients;
                                         List<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
 
                                         workout = new Workout(workoutName.getText().toString(), exercises);

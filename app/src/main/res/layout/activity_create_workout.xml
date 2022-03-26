@@ -30,7 +30,7 @@
         android:id="@+id/addExercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/custom_button2"
         android:text="Add Exercise"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
         android:id="@+id/createWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="3dp"
         android:background="@drawable/custom_button2"
         android:text="Create workout"
         android:textStyle="bold"
@@ -68,7 +68,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="13dp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/add_client_to_workout_button"
         app:layout_constraintEnd_toEndOf="@+id/setExerciseName" />
@@ -95,14 +94,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ExerciseList"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_clients_for_workout" />
+        app:layout_constraintTop_toBottomOf="@+id/add_client_to_workout_button" />
 
     <TextView
         android:id="@+id/title"
@@ -135,7 +133,6 @@
         android:id="@+id/add_client_to_workout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/custom_button2"
         android:text="Add Clients"
@@ -145,19 +142,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setSetsSpinner" />
-
-    <TextView
-
-        android:id="@+id/list_clients_for_workout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="No Clients Added"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_client_to_workout_button" />
 
     <TextView
         android:id="@+id/identifySets"
