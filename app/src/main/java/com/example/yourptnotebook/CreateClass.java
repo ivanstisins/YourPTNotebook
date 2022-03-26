@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -45,11 +46,12 @@ public class CreateClass extends AppCompatActivity {
     ArrayList<Student> students = new ArrayList<>();
     private Button myClasses;
     private Button addClientToClass;
-    TextView classClientList;
+    String classClientList;
     boolean[] selectedClients;
     ArrayList<Integer> clientList = new ArrayList<>();
     String[] clientArray;
-    Class studClass = new Class();
+    ArrayList<String> addedClients;
+    TextView addedClientText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,9 @@ public class CreateClass extends AppCompatActivity {
         setWorkout = findViewById(R.id.select_workout);
         myClasses = findViewById(R.id.myClasses);
         addClientToClass = findViewById(R.id.add_client_to_class);
-        classClientList = findViewById(R.id.list_clients_for_class);
+        addedClientText = findViewById(R.id.list_clients_for_class);
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
@@ -113,7 +117,8 @@ public class CreateClass extends AppCompatActivity {
                                                     clients = clients + ", ";
                                                 }
                                             }
-                                            classClientList.setText(clients);
+                                            //classClientList +=clients;
+                                            addedClientText.setText(clients);
                                         }
                                     });
 
@@ -129,8 +134,8 @@ public class CreateClass extends AppCompatActivity {
                                             for(int  j = 0; j < selectedClients.length; j++){
                                                 selectedClients[j] = false;
                                                 clientList.clear();
-                                                classClientList.setText("");
                                             }
+                                            addedClientText.setText("No Clients Assigned");
                                         }
                                     });
                                     AlertDialog alertDialog = builder.create();
@@ -150,8 +155,9 @@ public class CreateClass extends AppCompatActivity {
                                         classDate.setError("Provide class date");
                                         classDate.requestFocus();
                                     }
-                                    else{String clients = classClientList.getText().toString();
-                                        ArrayList<String> addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
+                                    else{
+                                        String clients = addedClientText.getText().toString();
+                                        addedClients = new ArrayList<String>(Arrays.asList(clients.split(", ")));
                                         int radioId = setType.getCheckedRadioButtonId();
                                         radioButton = findViewById(radioId);
                                         Workout state = (Workout) setWorkout.getSelectedItem();
@@ -188,6 +194,7 @@ public class CreateClass extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
         }
     }
 }
