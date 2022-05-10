@@ -192,7 +192,7 @@ public class create_workout extends AppCompatActivity{
                                                     clients = clients + ", ";
                                                 }
                                             }
-                                            addedClients += clients;
+                                            addedClients = clients;
                                         }
                                     });
 
